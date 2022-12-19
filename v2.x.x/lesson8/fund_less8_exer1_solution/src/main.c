@@ -4,15 +4,14 @@
  * SPDX-License-Identifier: Apache-2.0
  */
 
-#include <zephyr.h>
-#include <device.h>
-#include <drivers/gpio.h>
-#include <sys/printk.h>
-#include <sys/__assert.h>
-#include <kernel.h>
-#include <kernel_structs.h>
+#include <zephyr/kernel.h>
+#include <zephyr/drivers/gpio.h>
+#include <zephyr/sys/printk.h>
+#include <zephyr/sys/__assert.h>
+#include <zephyr/kernel_structs.h>
+#include <zephyr/random/rand32.h>
 #include <string.h>
-#include <random/rand32.h>
+
 
 #define PRODUCER_STACKSIZE       512
 #define CONSUMER_STACKSIZE       512

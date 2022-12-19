@@ -7,9 +7,7 @@
  * Tested on: Thingy:91 and Thingy:53 and nRF Connect SDK v2.0.0
  */
 
-#include <zephyr.h>
-#include <device.h>
-#include <devicetree.h>
+#include <zephyr/kernel.h>
 /* STEP 3 - Include the header file of the I2C API */
 
 /* STEP 4.1 - Include the header file of printk() */

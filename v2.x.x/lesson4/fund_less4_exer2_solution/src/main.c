@@ -6,11 +6,11 @@
  * Tested on nRF Connect SDK Version : 2.0
  */
 
-#include <zephyr.h>
-#include <drivers/gpio.h>
-#include <sys/printk.h>
+#include <zephyr/kernel.h>
+#include <zephyr/drivers/gpio.h>
+#include <zephyr/sys/printk.h>
 /* STEP 4 - Include the header file of the logger module */
-#include <logging/log.h>
+#include <zephyr/logging/log.h>
 
 #define MAX_NUMBER_FACT 10
 #define SLEEP_TIME_MS   10*60*1000

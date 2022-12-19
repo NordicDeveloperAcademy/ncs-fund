@@ -6,13 +6,11 @@
  * Note: Tested on nRF52833 DK
  */
 
-#include <zephyr.h>
-#include <device.h>
-#include <devicetree.h>
+#include <zephyr/kernel.h>
 /* STEP 3 - Include the header file of the I2C API */
-#include <drivers/i2c.h>
+#include <zephyr/drivers/i2c.h>
 /* STEP 4.1 - Include the header file of printk() */
-#include <sys/printk.h>
+#include <zephyr/sys/printk.h>
 /* 1000 msec = 1 sec */
 #define SLEEP_TIME_MS   1000
 

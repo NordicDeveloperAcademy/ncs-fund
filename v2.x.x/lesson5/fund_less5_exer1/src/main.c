@@ -8,9 +8,9 @@
 
 /* Controlling LEDs through UART. Press 1-3 on your keyboard to toggle LEDS 1-3 on your development kit */
 
-#include <zephyr.h>
-#include <drivers/gpio.h>
-#include <sys/printk.h>
+#include <zephyr/kernel.h>
+#include <zephyr/drivers/gpio.h>
+#include <zephyr/sys/printk.h>
 /* STEP 3 - Include the header file of the UART driver in main.c */
 
 

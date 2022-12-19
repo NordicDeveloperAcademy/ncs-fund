@@ -6,8 +6,8 @@
  * Tested on nRF Connect SDK Version : 2.0
  */
 
-#include <zephyr.h>
-#include <drivers/gpio.h>
+#include <zephyr/kernel.h>
+#include <zephyr/drivers/gpio.h>
 /* STEP 6 - Include the header file of printk */
 
 /* STEP 8.1 - Define the macro MAX_NUMBER_FACT that represents the maximum number to calculate its factorial  */

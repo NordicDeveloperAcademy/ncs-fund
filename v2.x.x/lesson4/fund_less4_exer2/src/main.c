@@ -6,11 +6,9 @@
  * Tested on nRF Connect SDK Version : 2.0
  */
 
-#include <zephyr.h>
-#include <device.h>
-#include <devicetree.h>
-#include <drivers/gpio.h>
-#include <sys/printk.h>
+#include <zephyr/kernel.h>
+#include <zephyr/drivers/gpio.h>
+#include <zephyr/sys/printk.h>
 /* STEP 4 - Include the header file of the logger module */
 
 

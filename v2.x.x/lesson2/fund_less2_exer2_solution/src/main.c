@@ -6,8 +6,8 @@
  * Tested on nRF Connect SDK Version : 2.0
  */
 
-#include <zephyr.h>
-#include <drivers/gpio.h>
+#include <zephyr/kernel.h>
+#include <zephyr/drivers/gpio.h>
 
 /* STEP 9 - Increase the sleep time from 100ms to 10 minutes  */
 #define SLEEP_TIME_MS   10*60*1000
