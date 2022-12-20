@@ -7,6 +7,8 @@
  */
 
 #include <zephyr/kernel.h>
+#include <zephyr/device.h>
+#include <zephyr/devicetree.h>
 /* STEP 3 - Include the header file of the I2C API */
 #include <zephyr/drivers/i2c.h>
 /* STEP 4.1 - Include the header file of printk() */
@@ -39,6 +41,7 @@ void main(void)
 	ret = i2c_write_dt(&dev_i2c, config, sizeof(config));
 	if(ret != 0){
 		printk("Failed to write to I2C device address %x at Reg. %x \n", dev_i2c.addr,config[0]);
+		return;
 	}
 
 	while (1) {

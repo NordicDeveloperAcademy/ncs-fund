@@ -7,6 +7,8 @@
  */
 
 #include <zephyr/kernel.h>
+#include <zephyr/device.h>
+#include <zephyr/devicetree.h>
 #include <zephyr/drivers/gpio.h>
 
 /* STEP 7 - Change the sleep time from 1000 ms to 100 ms */

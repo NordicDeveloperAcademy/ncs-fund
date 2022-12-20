@@ -8,6 +8,8 @@
  */
 
 #include <zephyr/kernel.h>
+#include <zephyr/device.h>
+#include <zephyr/devicetree.h>
 /* STEP 3 - Include the header file of the I2C API */
 #include <zephyr/drivers/i2c.h>
 /* STEP 4.1 - Include the header file of printk() */
