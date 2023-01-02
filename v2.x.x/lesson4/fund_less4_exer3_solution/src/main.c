@@ -76,7 +76,7 @@ void main(void)
 	if (ret < 0) {
 	}
 
-	ret = gpio_pin_interrupt_configure_dt(&button, GPIO_INT_EDGE_TO_ACTIVE | GPIO_INT_DEBOUNCE);
+	ret = gpio_pin_interrupt_configure_dt(&button, GPIO_INT_EDGE_TO_ACTIVE);
 
 	gpio_init_callback(&button_cb_data, button_pressed, BIT(button.pin));	
 
