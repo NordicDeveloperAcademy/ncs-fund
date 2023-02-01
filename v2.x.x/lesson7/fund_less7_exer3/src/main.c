@@ -47,19 +47,7 @@ void thread0(void)
 }
 
 /* STEP 4 - Define entry function for thread1 */
-void thread1(void)
-{
-    uint64_t time_stamp;
-    int64_t delta_time;
 
-    while (1) {
-        time_stamp = k_uptime_get();
-        emulate_work();
-        delta_time = k_uptime_delta(&time_stamp);
-        printk("thread1 yielding this round in %lld ms\n", delta_time);
-        k_msleep(20);
-    }   
-}
 
 K_THREAD_DEFINE(thread0_id, THREAD0_STACKSIZE, thread0, NULL, NULL, NULL,
 		THREAD0_PRIORITY, 0, 0);
