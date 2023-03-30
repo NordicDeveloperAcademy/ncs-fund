@@ -27,9 +27,15 @@
 #define RECEIVE_TIMEOUT 100
 
 /* STEP 5.1 - Get the device pointers of the LEDs through gpio_dt_spec */
+/* The nRF7002dk has only 2 LEDs so this step uses a compile-time condition to reflect the DK you are building for */
+#if defined (CONFIG_BOARD_NRF7002DK_NRF5340_CPUAPP)|| defined (CONFIG_BOARD_NRF7002DK_NRF5340_CPUAPP_NS)
+static const struct gpio_dt_spec led0 = GPIO_DT_SPEC_GET(DT_ALIAS(led0), gpios);
+static const struct gpio_dt_spec led1 = GPIO_DT_SPEC_GET(DT_ALIAS(led1), gpios);
+#else
 static const struct gpio_dt_spec led0 = GPIO_DT_SPEC_GET(DT_ALIAS(led0), gpios);
 static const struct gpio_dt_spec led1 = GPIO_DT_SPEC_GET(DT_ALIAS(led1), gpios);
 static const struct gpio_dt_spec led2 = GPIO_DT_SPEC_GET(DT_ALIAS(led2), gpios);
+#endif
 
 /* STEP 4.1 - Get the device pointer of the UART hardware */
 const struct device *uart= DEVICE_DT_GET(DT_NODELABEL(uart0));
@@ -48,7 +54,16 @@ static void uart_cb(const struct device *dev, struct uart_event *evt, void *user
 	switch (evt->type) {
 
 	case UART_RX_RDY:
+	#if defined (CONFIG_BOARD_NRF7002DK_NRF5340_CPUAPP)|| defined (CONFIG_BOARD_NRF7002DK_NRF5340_CPUAPP_NS)
 		if((evt->data.rx.len) == 1){
+
+		if(evt->data.rx.buf[evt->data.rx.offset] == '1')
+			gpio_pin_toggle_dt(&led0);
+		else if (evt->data.rx.buf[evt->data.rx.offset] == '2')
+			gpio_pin_toggle_dt(&led1);	
+		}
+	#else
+	if((evt->data.rx.len) == 1){
 
 		if(evt->data.rx.buf[evt->data.rx.offset] == '1')
 			gpio_pin_toggle_dt(&led0);
@@ -57,6 +72,7 @@ static void uart_cb(const struct device *dev, struct uart_event *evt, void *user
 		else if (evt->data.rx.buf[evt->data.rx.offset] == '3')
 			gpio_pin_toggle_dt(&led2);					
 		}
+#endif
 	break;
 	case UART_RX_DISABLED:
 		uart_rx_enable(dev ,rx_buf,sizeof rx_buf,RECEIVE_TIMEOUT);
@@ -82,7 +98,17 @@ int main(void)
 		return 1;
 	}
 /* STEP 6 - Configure the GPIOs of the LEDs */
+#if defined (CONFIG_BOARD_NRF7002DK_NRF5340_CPUAPP)|| defined (CONFIG_BOARD_NRF7002DK_NRF5340_CPUAPP_NS)
 	ret = gpio_pin_configure_dt(&led0, GPIO_OUTPUT_ACTIVE);
+	if (ret < 0) {
+		return 1 ; 
+	}
+	ret = gpio_pin_configure_dt(&led1, GPIO_OUTPUT_ACTIVE);
+	if (ret < 0) {
+		return 1 ;
+	}
+#else
+ret = gpio_pin_configure_dt(&led0, GPIO_OUTPUT_ACTIVE);
 	if (ret < 0) {
 		return 1 ; 
 	}
@@ -94,6 +120,8 @@ int main(void)
 	if (ret < 0) {
 		return 1 ;
 	}
+#endif
+
 /* STEP 8 - Register the UART callback function */
 	ret = uart_callback_set(uart, uart_cb, NULL);
 		if (ret) {
