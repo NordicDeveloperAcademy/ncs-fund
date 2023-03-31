@@ -1,16 +1,19 @@
 #include <zephyr/kernel.h>
 #include <zephyr/sys/printk.h>
-//#include "myfunction.h"
-
+#ifdef CONFIG_MYFUNCTION
+#include "myfunction.h"
+#endif
 void main(void)
 {
-	int a = 3, b = 4;
+	
 	while(1){
-		if(!(IS_ENABLED(CONFIG_MYFUNCTION))){
+		#ifdef CONFIG_MYFUNCTION
+		int a = 3, b = 4;
+			printk("The sum of %d and %d is %d\n\r", a, b, sum(a,b));
+		#else
 			printk("MYFUNCTION not enabled\r\n");
 			return;
-		}
-		printk("The sum of %d and %d is %d\n\r", a, b, sum(a,b));
+		#endif
 		k_msleep(1000);
 	}
 }
