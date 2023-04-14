@@ -5,7 +5,7 @@
     
     mysensor: mysensor@4a{
         compatible = "i2c-device";
+        status = "okay";
         reg = < 0x4a >;
-        label = "MYSENSOR";
     };
 };
