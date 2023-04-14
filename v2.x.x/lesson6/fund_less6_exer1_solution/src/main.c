@@ -22,7 +22,7 @@
 #define STTS751_CONFIG_REG               0x03
 
 /* STEP 6 - Get the node identifier of the sensor */
-#define I2C0_NODE DT_NODELABEL(mysensor)
+#define I2C_NODE DT_NODELABEL(mysensor)
 
 void main(void)
 {
@@ -30,7 +30,7 @@ void main(void)
 	int ret;
 
 /* STEP 7 - Retrieve the API-specific device structure and make sure that the device is ready to use  */
-	static const struct i2c_dt_spec dev_i2c = I2C_DT_SPEC_GET(I2C0_NODE);
+	static const struct i2c_dt_spec dev_i2c = I2C_DT_SPEC_GET(I2C_NODE);
 	if (!device_is_ready(dev_i2c.bus)) {
 		printk("I2C bus %s is not ready!\n\r",dev_i2c.bus->name);
 		return;
