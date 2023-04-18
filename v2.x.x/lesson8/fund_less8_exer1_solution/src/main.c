@@ -7,8 +7,6 @@
 #include <zephyr/kernel.h>
 #include <zephyr/sys/printk.h>
 #include <zephyr/random/rand32.h>
-#include <string.h>
-
 
 #define PRODUCER_STACKSIZE       512
 #define CONSUMER_STACKSIZE       512
@@ -52,7 +50,7 @@ void producer(void)
 	while (1) {
 		release_access();
 		// Assume the resource instance access is released at this point
-		k_msleep(sys_rand32_get() % 10);
+		k_msleep(500 + sys_rand32_get() % 10);
 	}
 }
 
