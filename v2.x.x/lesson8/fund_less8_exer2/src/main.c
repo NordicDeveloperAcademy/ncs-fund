@@ -23,29 +23,22 @@ void shared_code_section(void)
 {
 	/* STEP 12.1 - Lock the mutex */
 
-	/* STEP 6 - Increment partner and decrement partner changed */
+	/* STEP 6 - Increment count and decrement count changed */
 	/* according to logic defined in exercise text */
 
 	/* STEP 12.2 - Unlock the mutex */
 
 	/* STEP 7 - Print counter values if they do not add up to COMBINED_TOTAL */
+
 }
 
 /* STEP 4 - Functions for thread0 and thread1 with a shared code section */
-void thread0(void)
-{
 
-}
-
-void thread1(void)
-{
-
-}
 
 // Define and initialize threads
 K_THREAD_DEFINE(thread0_id, THREAD0_STACKSIZE, thread0, NULL, NULL, NULL,
-		THREAD0_PRIORITY, 0, 0);
+		THREAD0_PRIORITY, 0, 5000);
 
 K_THREAD_DEFINE(thread1_id, THREAD1_STACKSIZE, thread1, NULL, NULL, NULL,
-		THREAD1_PRIORITY, 0, 0);
+		THREAD1_PRIORITY, 0, 5000);
 
