@@ -12,7 +12,7 @@
 #define PRODUCER_STACKSIZE       512
 #define CONSUMER_STACKSIZE       512
 
-/* STEP 2 - Set the priority of the producer and consumper thread */
+/* STEP 2 - Set the priority of the producer and consumer thread */
 
 /* STEP 9 - Define semaphore to monitor instances of available resource */
 
