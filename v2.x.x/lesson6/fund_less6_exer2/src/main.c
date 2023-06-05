@@ -2,9 +2,6 @@
  * Copyright (c) 2016 Intel Corporation
  *
  * SPDX-License-Identifier: Apache-2.0
- * Title: nRF Connect SDK Fundementals Course - Lesson 6 - Exercise 2
- * Version: 0.1
- * Tested on: Thingy:91 and Thingy:53 and nRF Connect SDK v2.0.0
  */
 
 #include <zephyr/kernel.h>

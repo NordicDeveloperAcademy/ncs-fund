@@ -2,8 +2,6 @@
  * Copyright (c) 2016 Intel Corporation
  *
  * SPDX-License-Identifier: Apache-2.0
- * Note: 
- * Tested on nRF Connect SDK Version : 2.0
  */
 
 /* Controlling LEDs through UART. Press 1-3 on your keyboard to toggle LEDS 1-3 on your development kit */

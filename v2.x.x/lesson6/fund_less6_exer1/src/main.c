@@ -2,8 +2,6 @@
  * Copyright (c) 2016 Intel Corporation
  *
  * SPDX-License-Identifier: Apache-2.0
- * 
- * Note: Tested on nRF52833 DK
  */
 
 #include <zephyr/kernel.h>
