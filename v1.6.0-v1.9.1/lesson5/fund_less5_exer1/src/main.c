@@ -1,5 +1,8 @@
-/* 
-Controlling LEDs through UART. Press 1-4 on your keyboard to toggle LEDS 1-4 on your development kit */
+/*
+ * Copyright (c) 2016 Intel Corporation
+ *
+ * SPDX-License-Identifier: Apache-2.0
+ */
 
 #include <zephyr.h>
 #include <device.h>
