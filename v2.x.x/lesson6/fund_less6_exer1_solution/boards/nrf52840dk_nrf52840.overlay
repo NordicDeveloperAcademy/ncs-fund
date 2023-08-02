@@ -1,0 +1,11 @@
+// To get started, press Ctrl+Space to bring up the completion menu and view the available nodes.
+// For more help, browse the DeviceTree documentation at https://docs.zephyrproject.org/latest/guides/dts/index.html
+
+&i2c0 {
+    
+    mysensor: mysensor@4a{
+        compatible = "i2c-device";
+        status = "okay";
+        reg = < 0x4a >;
+    };
+};
