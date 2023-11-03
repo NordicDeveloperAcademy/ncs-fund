@@ -30,7 +30,7 @@ void main(void)
 /* STEP 7 - Retrieve the API-specific device structure and make sure that the device is ready to use  */
 	static const struct i2c_dt_spec dev_i2c = I2C_DT_SPEC_GET(I2C_NODE);
 	if (!device_is_ready(dev_i2c.bus)) {
-		printk("I2C bus %s is not ready!\n\r",dev_i2c.bus->name);
+		printk("I2C bus %s is not ready!\n",dev_i2c.bus->name);
 		return;
 	}
 
@@ -48,11 +48,11 @@ void main(void)
 		uint8_t sensor_regs[2] ={STTS751_TEMP_LOW_REG,STTS751_TEMP_HIGH_REG};
 		ret = i2c_write_read_dt(&dev_i2c,&sensor_regs[0],1,&temp_reading[0],1);
 		if(ret != 0){
-			printk("Failed to write/read I2C device address %x at Reg. %x \r\n", dev_i2c.addr,sensor_regs[0]);
+			printk("Failed to write/read I2C device address %x at Reg. %x \n", dev_i2c.addr,sensor_regs[0]);
 		}
 		ret = i2c_write_read_dt(&dev_i2c,&sensor_regs[1],1,&temp_reading[1],1);
 		if(ret != 0){
-			printk("Failed to write/read I2C device address %x at Reg. %x \r\n", dev_i2c.addr,sensor_regs[1]);
+			printk("Failed to write/read I2C device address %x at Reg. %x \n", dev_i2c.addr,sensor_regs[1]);
 		}
 
 /* STEP 11 - Convert the two bytes to a 12-bits */

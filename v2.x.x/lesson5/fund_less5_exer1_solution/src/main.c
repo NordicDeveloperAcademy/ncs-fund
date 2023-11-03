@@ -40,8 +40,8 @@ const struct device *uart= DEVICE_DT_GET(DT_NODELABEL(uart0));
 
 
 /* STEP 9.1 - Define the transmission buffer, which is a buffer to hold the data to be sent over UART */
-static uint8_t tx_buf[] =   {"nRF Connect SDK Fundamentals Course\n\r"
-                             "Press 1-3 on your keyboard to toggle LEDS 1-3 on your development kit\n\r"};
+static uint8_t tx_buf[] =   {"nRF Connect SDK Fundamentals Course\n"
+                             "Press 1-3 on your keyboard to toggle LEDS 1-3 on your development kit\n"};
 
 /* STEP 10.1.2 - Define the receive buffer */
 static uint8_t rx_buf[RECEIVE_BUFF_SIZE] = {0};
@@ -73,7 +73,7 @@ static void uart_cb(const struct device *dev, struct uart_event *evt, void *user
 #endif
 	break;
 	case UART_RX_DISABLED:
-		uart_rx_enable(dev ,rx_buf,sizeof rx_buf,RECEIVE_TIMEOUT);
+		uart_rx_enable(dev ,rx_buf,sizeof(rx_buf),RECEIVE_TIMEOUT);
 		break;
 		
 	default:
@@ -87,36 +87,36 @@ int main(void)
 
 /* STEP 4.2 - Verify that the UART device is ready */ 
 	if (!device_is_ready(uart)){
-		printk("UART device not ready\r\n");
-		return 1 ;
+		printk("UART device not ready\n");
+		return 1;
 	}
 /* STEP 5.2 - Verify that the LED devices are ready */
 	if (!device_is_ready(led0.port)){
-		printk("GPIO device is not ready\r\n");
+		printk("GPIO device is not ready\n");
 		return 1;
 	}
 /* STEP 6 - Configure the GPIOs of the LEDs */
 #if defined (CONFIG_BOARD_NRF7002DK_NRF5340_CPUAPP)|| defined (CONFIG_BOARD_NRF7002DK_NRF5340_CPUAPP_NS)
 	ret = gpio_pin_configure_dt(&led0, GPIO_OUTPUT_ACTIVE);
 	if (ret < 0) {
-		return 1 ; 
+		return 1; 
 	}
 	ret = gpio_pin_configure_dt(&led1, GPIO_OUTPUT_ACTIVE);
 	if (ret < 0) {
-		return 1 ;
+		return 1;
 	}
 #else
 ret = gpio_pin_configure_dt(&led0, GPIO_OUTPUT_ACTIVE);
 	if (ret < 0) {
-		return 1 ; 
+		return 1; 
 	}
 	ret = gpio_pin_configure_dt(&led1, GPIO_OUTPUT_ACTIVE);
 	if (ret < 0) {
-		return 1 ;
+		return 1;
 	}
 	ret = gpio_pin_configure_dt(&led2, GPIO_OUTPUT_ACTIVE);
 	if (ret < 0) {
-		return 1 ;
+		return 1;
 	}
 #endif
 
@@ -131,7 +131,7 @@ ret = gpio_pin_configure_dt(&led0, GPIO_OUTPUT_ACTIVE);
 		return 1;
 	}
 /* STEP 10.3  - Start receiving by calling uart_rx_enable() and pass it the address of the receive  buffer */
-	ret = uart_rx_enable(uart ,rx_buf,sizeof rx_buf,RECEIVE_TIMEOUT);
+	ret = uart_rx_enable(uart ,rx_buf,sizeof(rx_buf),RECEIVE_TIMEOUT);
 	if (ret) {
 		return 1;
 	}

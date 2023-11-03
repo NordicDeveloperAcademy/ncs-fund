@@ -42,15 +42,19 @@ void shared_code_section(void)
 		decrement_count = COMBINED_TOTAL;
 	}
 
+    // must take a copy of these variables while we still have the lock.
+	int32_t increment_count_snapshot = increment_count;
+	int32_t decrement_count_snapshot = decrement_count;
+
 	/* STEP 12.2 - Unlock the mutex */
 	k_mutex_unlock(&test_mutex);
 
 	/* STEP 7 - Print counter values if they do not add up to COMBINED_TOTAL */
-	if(increment_count + decrement_count != COMBINED_TOTAL )
+	if(increment_count_snapshot + decrement_count_snapshot != COMBINED_TOTAL )
 	{
-		printk("Race condition happend!\n");
+		printk("Race condition happened!\n");
 		printk("Increment_count (%d) + Decrement_count (%d) = %d \n",
-	                increment_count, decrement_count, (increment_count + decrement_count));
+	                increment_count_snapshot, decrement_count_snapshot, (increment_count_snapshot + decrement_count_snapshot));
 		k_msleep(400 + sys_rand32_get() % 10);
 	}
 }
