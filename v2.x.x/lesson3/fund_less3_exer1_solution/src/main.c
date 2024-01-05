@@ -8,7 +8,7 @@
 #include <zephyr/sys/printk.h>
 
 
-void main(void)
+int main(void)
 {
 	while(1) {
 		printk("Hello World!\n\r");

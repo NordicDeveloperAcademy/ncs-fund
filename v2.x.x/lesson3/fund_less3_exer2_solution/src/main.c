@@ -11,7 +11,7 @@
 #include "myfunction.h"
 #endif
 
-void main(void)
+int main(void)
 {
 	
 	while(1){
