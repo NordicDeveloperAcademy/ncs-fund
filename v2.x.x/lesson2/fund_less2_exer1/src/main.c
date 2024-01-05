@@ -22,19 +22,19 @@
 static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
 
 
-void main(void)
+int main(void)
 {
 	int ret;
 
 	if (!device_is_ready(led.port)) {
-		return;
+		return -1;
 	}
 	/* STEP 4 - Verify that the device is ready for use */
 
 
 	ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE);
 	if (ret < 0) {
-		return;
+		return -1;
 	}
 
 	/* STEP 5 - Configure the pin connected to the button to be an input pin and set its hardware specifications */
