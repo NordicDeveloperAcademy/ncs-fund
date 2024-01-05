@@ -19,7 +19,7 @@
 
 /* STEP 6 - Get the node identifier of the sensor */
 
-void main(void)
+int main(void)
 {
 
 	int ret;

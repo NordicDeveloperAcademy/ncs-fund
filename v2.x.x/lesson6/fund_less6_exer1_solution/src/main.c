@@ -22,7 +22,7 @@
 /* STEP 6 - Get the node identifier of the sensor */
 #define I2C_NODE DT_NODELABEL(mysensor)
 
-void main(void)
+int main(void)
 {
 
 	int ret;
@@ -31,7 +31,7 @@ void main(void)
 	static const struct i2c_dt_spec dev_i2c = I2C_DT_SPEC_GET(I2C_NODE);
 	if (!device_is_ready(dev_i2c.bus)) {
 		printk("I2C bus %s is not ready!\n\r",dev_i2c.bus->name);
-		return;
+		return -1;
 	}
 
 /* STEP 9 - Setup the sensor by writing the value 0x8C to the Configuration register */
@@ -39,7 +39,7 @@ void main(void)
 	ret = i2c_write_dt(&dev_i2c, config, sizeof(config));
 	if(ret != 0){
 		printk("Failed to write to I2C device address %x at Reg. %x \n", dev_i2c.addr,config[0]);
-		return;
+		return -1;
 	}
 
 	while (1) {
