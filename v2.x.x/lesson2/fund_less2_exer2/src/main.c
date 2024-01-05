@@ -26,26 +26,26 @@ static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
 
 /* STEP 5 - Define a variable of type static struct gpio_callback */
 
-void main(void)
+int main(void)
 {
 	int ret;
 
 	if (!device_is_ready(led.port)) {
-		return;
+		return -1;
 	}
 
 	if (!device_is_ready(button.port)) {
-		return;
+		return -1;
 	}
 
 	ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE);
 	if (ret < 0) {
-		return;
+		return -1;
 	}
 
 	ret = gpio_pin_configure_dt(&button, GPIO_INPUT);
 	if (ret < 0) {
-		return;
+		return -1;
 	}
 	/* STEP 3 - Configure the interrupt on the button's pin */
 

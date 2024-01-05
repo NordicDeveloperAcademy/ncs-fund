@@ -31,26 +31,26 @@ void button_pressed(const struct device *dev, struct gpio_callback *cb, uint32_t
 /* STEP 5 - Define a variable of type static struct gpio_callback */
 static struct gpio_callback button_cb_data;
 
-void main(void)
+int main(void)
 {
 	int ret;
 
 	if (!device_is_ready(led.port)) {
-		return;
+		return -1;
 	}
 
 	if (!device_is_ready(button.port)) {
-		return;
+		return -1;
 	}
 
 	ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE);
 	if (ret < 0) {
-		return;
+		return -1;
 	}
 
 	ret = gpio_pin_configure_dt(&button, GPIO_INPUT);
 	if (ret < 0) {
-		return;
+		return -1;
 	}
 	/* STEP 3 - Configure the interrupt on the button's pin */
 	ret = gpio_pin_interrupt_configure_dt(&button, GPIO_INT_EDGE_TO_ACTIVE );
@@ -59,7 +59,7 @@ void main(void)
     gpio_init_callback(&button_cb_data, button_pressed, BIT(button.pin)); 	
 	
 	/* STEP 7 - Add the callback function by calling gpio_add_callback()   */
-	 gpio_add_callback(button.port, &button_cb_data);
+	gpio_add_callback(button.port, &button_cb_data);
 	 
 	while (1) {
 		/* STEP 8 - Remove the polling code */
