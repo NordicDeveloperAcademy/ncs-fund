@@ -44,7 +44,7 @@ void button_pressed(const struct device *dev, struct gpio_callback *cb,
 
 static struct gpio_callback button_cb_data;
 
-void main(void)
+int main(void)
 {
 	int ret;
     int exercise_num = 3;
@@ -62,16 +62,17 @@ void main(void)
 
 	/* Only checking one since led.port and button.port point to the same device, &gpio0 */
 	if (!device_is_ready(led.port)) {
-		return;
+		return -1;
 	}
 
 	ret = gpio_pin_configure_dt(&led, GPIO_OUTPUT_ACTIVE);
 	if (ret < 0) {
-		return;
+		return -1;
 	}
 
 	ret = gpio_pin_configure_dt(&button, GPIO_INPUT);
 	if (ret < 0) {
+		return -1;    
 	}
 
 	ret = gpio_pin_interrupt_configure_dt(&button, GPIO_INT_EDGE_TO_ACTIVE);
