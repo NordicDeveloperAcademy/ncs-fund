@@ -26,7 +26,7 @@
 /* STEP 6 - Get the node identifier of the sensor */
 #define I2C_NODE DT_NODELABEL(bh1749)
 
-void main(void)
+int main(void)
 {
 
 	int ret;
@@ -35,7 +35,7 @@ void main(void)
 	static const struct i2c_dt_spec dev_i2c = I2C_DT_SPEC_GET(I2C_NODE);
 	if (!device_is_ready(dev_i2c.bus)) {
 		printk("I2C bus %s is not ready!\n\r",dev_i2c.bus->name);
-		return;
+		return -1;
 	}
 
 /* STEP 9 - Setup the sensor by writing the value 0x2A to the MODE_CONTROL1 register 

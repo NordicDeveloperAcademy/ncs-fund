@@ -6,7 +6,7 @@
 
 #include <zephyr/kernel.h>
 #include <zephyr/sys/printk.h>
-#include <zephyr/random/rand32.h>
+#include <zephyr/random/random.h>
 
 #define PRODUCER_STACKSIZE       512
 #define CONSUMER_STACKSIZE       512
