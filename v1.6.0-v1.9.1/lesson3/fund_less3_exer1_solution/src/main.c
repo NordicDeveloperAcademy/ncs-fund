@@ -11,7 +11,7 @@
 void main(void)
 {
 	while(1) {
-		printk("Hello World!\n\r");
+		printk("Hello World!\n");
 		k_msleep(1000);
 	}
 }

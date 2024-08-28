@@ -10,19 +10,19 @@
 #include <zephyr/drivers/gpio.h>
 /* STEP 6 - Include the header file of printk */
 
-/* STEP 8.1 - Define the macro MAX_NUMBER_FACT that represents the maximum number to calculate its factorial  */
+/* STEP 8.1 - Define the macro MAX_NUMBER_FACT that represents the maximum number to calculate its
+ * factorial  */
 
-#define SLEEP_TIME_MS   10*60*1000
+#define SLEEP_TIME_MS 10 * 60 * 1000
 
-#define SW0_NODE	DT_ALIAS(sw0)
+#define SW0_NODE DT_ALIAS(sw0)
 static const struct gpio_dt_spec button = GPIO_DT_SPEC_GET(SW0_NODE, gpios);
 
 #define LED0_NODE DT_ALIAS(led0)
 static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
 
 /* STEP 8.2 - Replace the button callback function */
-void button_pressed(const struct device *dev, struct gpio_callback *cb,
-		    uint32_t pins)
+void button_pressed(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
 {
 	gpio_pin_toggle_dt(&led);
 }
@@ -51,10 +51,10 @@ int main(void)
 
 	ret = gpio_pin_interrupt_configure_dt(&button, GPIO_INT_EDGE_TO_ACTIVE);
 
-	gpio_init_callback(&button_cb_data, button_pressed, BIT(button.pin));	
+	gpio_init_callback(&button_cb_data, button_pressed, BIT(button.pin));
 
-	gpio_add_callback(button.port, &button_cb_data);	
+	gpio_add_callback(button.port, &button_cb_data);
 	while (1) {
-        k_msleep(SLEEP_TIME_MS); 
+		k_msleep(SLEEP_TIME_MS);
 	}
 }

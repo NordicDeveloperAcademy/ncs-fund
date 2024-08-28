@@ -9,8 +9,8 @@
 #include <zephyr/random/random.h>
 #include <string.h>
 
-#define THREAD0_STACKSIZE       512
-#define THREAD1_STACKSIZE       512
+#define THREAD0_STACKSIZE 512
+#define THREAD1_STACKSIZE 512
 
 /* STEP 3 - Set the priority of the two threads to have equal priority*/
 
@@ -29,16 +29,13 @@ void shared_code_section(void)
 	/* STEP 12.2 - Unlock the mutex */
 
 	/* STEP 7 - Print counter values if they do not add up to COMBINED_TOTAL */
-
 }
 
 /* STEP 4 - Functions for thread0 and thread1 with a shared code section */
 
-
 // Define and initialize threads
-K_THREAD_DEFINE(thread0_id, THREAD0_STACKSIZE, thread0, NULL, NULL, NULL,
-		THREAD0_PRIORITY, 0, 5000);
+K_THREAD_DEFINE(thread0_id, THREAD0_STACKSIZE, thread0, NULL, NULL, NULL, THREAD0_PRIORITY, 0,
+		5000);
 
-K_THREAD_DEFINE(thread1_id, THREAD1_STACKSIZE, thread1, NULL, NULL, NULL,
-		THREAD1_PRIORITY, 0, 5000);
-
+K_THREAD_DEFINE(thread1_id, THREAD1_STACKSIZE, thread1, NULL, NULL, NULL, THREAD1_PRIORITY, 0,
+		5000);

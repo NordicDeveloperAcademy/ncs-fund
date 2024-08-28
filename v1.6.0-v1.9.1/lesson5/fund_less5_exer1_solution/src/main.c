@@ -40,8 +40,8 @@
 static const struct device *leds;
 
 /* STEP 8.1 - Define the transmission buffer, which is a buffer to hold the data to be sent over UART */
-static uint8_t tx_buf[] =   {"nRF Connect SDK Fundamentals Course\n\r"
-                             "Press 1-3 on your keyboard to toggle LEDS 1-3 on your development kit\n\r"};
+static uint8_t tx_buf[] =   {"nRF Connect SDK Fundamentals Course\n"
+                             "Press 1-3 on your keyboard to toggle LEDS 1-3 on your development kit\n"};
 
 /* STEP 9.1.2 - Define the receive buffer */
 static uint8_t rx_buf[RECEIVE_BUFF_SIZE] = {0};
@@ -83,7 +83,7 @@ int main(void)
 /* STEP 4 - Get the device struct of the UART hardware */
 	const struct device *uart= device_get_binding(DT_LABEL(DT_NODELABEL(uart0)));
 	if (uart== NULL) {
-		printk("Could not find  %s!\n\r",DT_LABEL(DT_NODELABEL(uart0)));
+		printk("Could not find  %s!\n",DT_LABEL(DT_NODELABEL(uart0)));
 		return 1 ;
 	}
 /* STEP 5.2 - Configure the LEDs */

@@ -38,7 +38,7 @@ void main(void)
 /* STEP 6 - Get the binding of the I2C driver  */
 	const struct device *dev_i2c = device_get_binding(I2C0);
 	if (dev_i2c == NULL) {
-		printk("Could not find  %s!\n\r",I2C0);
+		printk("Could not find  %s!\n",I2C0);
 		return;
 	}
 /* STEP 8 - Setup the sensor by writing the value 0x8C to the Configuration register */
