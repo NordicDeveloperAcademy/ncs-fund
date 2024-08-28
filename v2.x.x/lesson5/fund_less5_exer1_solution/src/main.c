@@ -43,8 +43,8 @@ const struct device *uart = DEVICE_DT_GET(DT_NODELABEL(uart0));
 /* STEP 9.1 - Define the transmission buffer, which is a buffer to hold the data to be sent over
  * UART */
 static uint8_t tx_buf[] = {
-	"nRF Connect SDK Fundamentals Course\n"
-	"Press 1-3 on your keyboard to toggle LEDS 1-3 on your development kit\n"};
+	"nRF Connect SDK Fundamentals Course\r\n"
+	"Press 1-3 on your keyboard to toggle LEDS 1-3 on your development kit\r\n"};
 
 /* STEP 10.1.2 - Define the receive buffer */
 static uint8_t rx_buf[RECEIVE_BUFF_SIZE] = {0};
