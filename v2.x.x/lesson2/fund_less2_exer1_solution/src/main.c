@@ -15,7 +15,7 @@
 /* STEP 3.1 - Get the node identifier for button 1 through its alias sw0 */
 #define SW0_NODE DT_ALIAS(sw0)
 
-/* STEP 3.2 - Get the device pointer. pin number, and pin's configuration flags through gpio_dt_spec
+/* STEP 3.2 - Get the device pointer, pin number, and pin's configuration flags through gpio_dt_spec
  */
 static const struct gpio_dt_spec button = GPIO_DT_SPEC_GET(SW0_NODE, gpios);
 

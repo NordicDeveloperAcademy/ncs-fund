@@ -14,7 +14,7 @@
 
 /* STEP 3.1 - Get the node identifier for button 1 through its alias sw0 */
 
-/* STEP 3.2 - Get the device pointer. pin number, and pin's configuration flags through gpio_dt_spec
+/* STEP 3.2 - Get the device pointer, pin number, and pin's configuration flags through gpio_dt_spec
  */
 
 /* LED0_NODE is the devicetree node identifier for the "led0" alias. */
