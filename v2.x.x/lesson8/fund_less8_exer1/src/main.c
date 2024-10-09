@@ -6,7 +6,12 @@
 
 #include <zephyr/kernel.h>
 #include <zephyr/sys/printk.h>
+#include "ncs_version.h"
+#if NCS_VERSION_NUMBER < 0x20600
+#include <zephyr/random/rand32.h>
+#else 
 #include <zephyr/random/random.h>
+#endif
 #include <string.h>
 
 #define PRODUCER_STACKSIZE 512
