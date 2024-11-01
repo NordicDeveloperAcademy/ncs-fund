@@ -7,8 +7,9 @@ In the  course, you will learn how to develop portable RTOS-based applications t
 
 This repository contains the exercise code base and solutions. Make sure to select the directory that corresponds with the nRF Connect SDK version of your choosing:
 <ul>
-    <li><code>v1.6.0-v1.9.1</code>: For nRF Connect SDK versions v1.6.0 to v1.9.1 </li>
-    <li><code>v2.x.x</code>: For nRF Connect SDK versions v2.0.0 and all subsequent versions</li>
+    <li><code>v2.8.x-v2.7.0</code>: For nRF Connect SDK versions v2.8.x to v2.7.0 </li> 
+    <li><code>v2.6.2-v2.0.0</code>: For nRF Connect SDK versions v2.6.2 to v2.0.0 </li> 
+    <li><code>v1.9.1-v1.6.0</code>: For nRF Connect SDK versions v1.9.1 to v1.6.1 </li> 
 </ul>
 
 The course supports the following hardware:
