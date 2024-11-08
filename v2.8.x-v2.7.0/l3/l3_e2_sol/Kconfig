@@ -1,0 +1,11 @@
+#
+# Copyright (c) 2020 Nordic Semiconductor
+#
+# SPDX-License-Identifier: LicenseRef-Nordic-5-Clause
+#
+
+source "Kconfig.zephyr"
+
+config MYFUNCTION
+	bool "Enable my function"
+	default n
