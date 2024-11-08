@@ -3,7 +3,7 @@ This repository is part of the [nRF Connect SDK Fundamentals](https://academy.no
 
 The nRF Connect SDK Fundamentals course is a self-paced hands-on online course focusing on learning the essentials of firmware development using the highly extensible and feature-rich [nRF Connect SDK](https://www.nordicsemi.com/Products/Development-software/nrf-connect-sdk). 
 
-In the  course, you will learn how to develop portable RTOS-based applications that can run on any of Nordic Semiconductor devices (nRF52, nRF53, or nRF91 Series). In addition to that, you will gain substantial practical experience in interfacing with common peripherals/system blocks and external sensors, which will give you the confidence to apply the knowledge and the know-how to your project.
+In the  course, you will learn how to develop portable RTOS-based applications that can run on any of Nordic Semiconductor devices (nRF52, nRF53, nRF54, nRF70, or nRF91 Series). In addition to that, you will gain substantial practical experience in interfacing with common peripherals/system blocks and external sensors, which will give you the confidence to apply the knowledge and the know-how to your project.
 
 This repository contains the exercise code base and solutions. Make sure to select the directory that corresponds with the nRF Connect SDK version of your choosing:
 <ul>
@@ -13,7 +13,7 @@ This repository contains the exercise code base and solutions. Make sure to sele
 </ul>
 
 The course supports the following hardware:
- - [nRF54L15 DK](https://docs.nordicsemi.com/bundle/ncs-latest/page/zephyr/boards/nordic/nrf54l15dk/doc/index.html) - On nRF Connect SDK v2.8.0 and above
+ - [nRF54L15 DK](https://www.nordicsemi.com/Products/Development-hardware/nRF54L15-DK) - On nRF Connect SDK v2.8.0 and above
  - [nRF5340 DK](https://www.nordicsemi.com/Software-and-tools/Development-Kits/nRF5340-DK) 
  - [nRF52840 DK](https://www.nordicsemi.com/Software-and-tools/Development-Kits/nRF52840-DK)
  - [nRF52833 DK](https://www.nordicsemi.com/Software-and-tools/Development-Kits/nRF52833-DK)
