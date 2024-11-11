@@ -14,8 +14,8 @@
 #endif
 #include <string.h>
 
-#define THREAD0_STACKSIZE 512
-#define THREAD1_STACKSIZE 512
+#define THREAD0_STACKSIZE 1024
+#define THREAD1_STACKSIZE 1024
 
 /* STEP 3 - Set the priority of the two threads to have equal priority*/
 

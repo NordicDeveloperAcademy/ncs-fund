@@ -14,8 +14,8 @@
 #endif
 #include <string.h>
 
-#define PRODUCER_STACKSIZE 512
-#define CONSUMER_STACKSIZE 512
+#define PRODUCER_STACKSIZE 1024
+#define CONSUMER_STACKSIZE 1024
 
 /* STEP 2 - Set the priority of the producer and consumer thread */
 
