@@ -18,9 +18,11 @@ The course supports the following hardware:
  - [nRF52840 DK](https://www.nordicsemi.com/Software-and-tools/Development-Kits/nRF52840-DK)
  - [nRF52833 DK](https://www.nordicsemi.com/Software-and-tools/Development-Kits/nRF52833-DK)
  - [nRF52 DK](https://www.nordicsemi.com/Products/Development-hardware/nrf52-dk)
- - [nRF9160 DK](https://www.nordicsemi.com/Products/Development-hardware/nrf9160-dk)
+ - [nRF9151 DK](https://www.nordicsemi.com/Products/Development-hardware/nRF9151-DK)
  - [nRF9161 DK](https://www.nordicsemi.com/Products/Development-hardware/nRF9161-DK)
+ - [nRF9160 DK](https://www.nordicsemi.com/Products/Development-hardware/nrf9160-dk)
  - [nRF7002 DK](https://www.nordicsemi.com/Products/Development-hardware/nRF7002-DK)
+ - [Thingy:91 X](https://www.nordicsemi.com/Products/Development-hardware/Nordic-Thingy-91-X)
  - [Thingy:91](https://www.nordicsemi.com/Products/Development-hardware/Nordic-Thingy-91)
  - [Thingy:53](https://www.nordicsemi.com/Products/Development-hardware/Nordic-Thingy-53)
    
