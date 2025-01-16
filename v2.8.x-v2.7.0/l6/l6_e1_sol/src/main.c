@@ -56,7 +56,6 @@ struct bme280_data {
 void bme_calibrationdata(const struct i2c_dt_spec *spec)
 {
 	uint8_t values[3];
-	uint8_t size = 3;	
 	uint8_t regaddr;
 
 	regaddr = CALIB00;
@@ -116,7 +115,6 @@ int main(void)
 	}
 
 	regs[0] = CTRLHUM;
-	uint8_t tmp = 0x04;
 
 	uint8_t  reg_write[] ={CTRLHUM,0x04};
 	i2c_write_dt(&dev_i2c,reg_write,2);

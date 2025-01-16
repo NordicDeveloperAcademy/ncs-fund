@@ -6,10 +6,10 @@
     pinctrl-0 = <&i2c22_default>;
 	pinctrl-1 = <&i2c22_sleep>;
     pinctrl-names = "default", "sleep";
-    mysensor: mysensor@4a{
+    mysensor: mysensor@77{
         compatible = "i2c-device";
         status = "okay";
-        reg = < 0x4a >;
+        reg = < 0x77 >;
     };
 };
 

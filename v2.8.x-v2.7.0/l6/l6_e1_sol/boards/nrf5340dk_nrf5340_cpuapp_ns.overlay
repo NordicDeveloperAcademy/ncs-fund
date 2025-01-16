@@ -2,40 +2,31 @@
 // For more help, browse the DeviceTree documentation at https://docs.zephyrproject.org/latest/guides/dts/index.html
 
 
-&i2c1 {
-    
-    mysensor: mysensor@4a{
+&i2c2 {
+    status = "okay";
+    pinctrl-0 = <&i2c2_default>;
+	pinctrl-1 = <&i2c2_sleep>;
+    pinctrl-names = "default", "sleep";
+    mysensor: mysensor@77{
         compatible = "i2c-device";
         status = "okay";
-        reg = <0x4a>;
+        reg = < 0x77 >;
     };
 };
 
-// &i2c2 {
-//     status = "okay";
-//     pinctrl-0 = <&i2c2_default>;
-// 	pinctrl-1 = <&i2c2_sleep>;
-//     pinctrl-names = "default", "sleep";
-//     mysensor: mysensor@77{
-//         compatible = "i2c-device";
-//         status = "okay";
-//         reg = < 0x77 >;
-//     };
-// };
+&pinctrl {
+	/omit-if-no-ref/ i2c2_default: i2c2_default {
+		group1  {
+			psels = <NRF_PSEL(TWIM_SCL, 1, 14)>,
+					<NRF_PSEL(TWIM_SDA, 1, 15)>;
+		};
+	};
 
-// &pinctrl {
-// 	/omit-if-no-ref/ i2c2_default: i2c2_default {
-// 		group1  {
-// 			psels = <NRF_PSEL(TWIM_SCL, 1, 14)>,
-// 					<NRF_PSEL(TWIM_SDA, 1, 15)>;
-// 		};
-// 	};
-
-// 	/omit-if-no-ref/ i2c2_sleep: i2c2_sleep {
-// 		group1  {
-// 			psels = <NRF_PSEL(TWIM_SCL, 1, 14)>,
-// 					<NRF_PSEL(TWIM_SDA, 1, 15)>;
-// 			low-power-enable;
-// 		};
-// 	};
-// };
+	/omit-if-no-ref/ i2c2_sleep: i2c2_sleep {
+		group1  {
+			psels = <NRF_PSEL(TWIM_SCL, 1, 14)>,
+					<NRF_PSEL(TWIM_SDA, 1, 15)>;
+			low-power-enable;
+		};
+	};
+};
