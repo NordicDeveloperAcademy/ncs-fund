@@ -13,28 +13,15 @@
 #include <zephyr/sys/printk.h>
 /* 1000 msec = 1 sec */
 #define SLEEP_TIME_MS 1000
-#define DELAY_PARAM		50
 
-#define BME_280_CHIP_ID		  0xD0
-
-#define CTRLHUM 		0xF2
-#define CTRLMEAS		0xF4
-#define CALIB00			0x88
-#define CALIB26			0xE1
-#define ID				0xD0
-#define PRESSMSB		0xF7
-#define PRESSLSB		0xF8
-#define PRESSXLSB		0xF9
-#define TEMPMSB			0xFA
-#define TEMPLSB			0xFB
-#define TEMPXLSB		0xFC
-#define HUMMSB			0xFD
-#define HUMLSB			0xFE
-#define DUMMY			0xFF
+/* STEP 8 - Define the addresses of relevant registers */
+#define CTRLMEAS 0xF4
+#define CALIB00	 0x88
+#define ID	 0xD0
+#define TEMPMSB	 0xFA
 
 /* STEP 6 - Get the node identifier of the sensor */
 #define I2C_NODE DT_NODELABEL(mysensor)
-
 
 /* Data structure to store BME280 data */
 struct bme280_data {
@@ -42,52 +29,36 @@ struct bme280_data {
 	uint16_t dig_t1;
 	int16_t dig_t2;
 	int16_t dig_t3;
-
-	/* Compensated values */
-	int32_t comp_temp;
-
-	/* Carryover between temperature and pressure/humidity compensation */
-	int32_t t_fine;
-
-	uint8_t chip_id;
 } bmedata;
 
-
-void bme_calibrationdata(const struct i2c_dt_spec *spec)
+/* Read sensor calibration data and stores these into sensor data */
+void bme_calibrationdata(const struct i2c_dt_spec *spec, struct bme280_data *sensor_data_ptr)
 {
-	uint8_t values[3];
+	uint8_t values[6];
 	uint8_t regaddr;
 
 	regaddr = CALIB00;
-	i2c_write_read_dt(spec,&regaddr, 1,values, 2);
-	bmedata.dig_t1 = ((uint16_t)values[1])<<8 | values[0];
-	k_msleep(DELAY_PARAM);
-
-	regaddr += 2;
-	i2c_write_read_dt(spec,&regaddr, 1,values, 2);
-	bmedata.dig_t2 = ((uint16_t)values[1])<<8 | values[1];
-	k_msleep(DELAY_PARAM);
-	
-	regaddr += 2;
-	i2c_write_read_dt(spec,&regaddr, 1,values, 2);
-	bmedata.dig_t3 = ((uint16_t)values[1])<<8 | values[1];
-	k_msleep(DELAY_PARAM);
-
+	i2c_burst_read_dt(spec, CALIB00, values, 6);
+	sensor_data_ptr->dig_t1 = ((uint16_t)values[1]) << 8 | values[0];
+	sensor_data_ptr->dig_t2 = ((uint16_t)values[3]) << 8 | values[2];
+	sensor_data_ptr->dig_t3 = ((uint16_t)values[5]) << 8 | values[4];
 }
+
+/* Compensate current temperature using previously stored sensor calibration data */
 static int32_t bme280_compensate_temp(struct bme280_data *data, int32_t adc_temp)
 {
 	int32_t var1, var2;
 
-	var1 = (((adc_temp >> 3) - ((int32_t)data->dig_t1 << 1)) *
-		((int32_t)data->dig_t2)) >> 11;
+	var1 = (((adc_temp >> 3) - ((int32_t)data->dig_t1 << 1)) * ((int32_t)data->dig_t2)) >> 11;
+
 	var2 = (((((adc_temp >> 4) - ((int32_t)data->dig_t1)) *
-		  ((adc_temp >> 4) - ((int32_t)data->dig_t1))) >> 12) *
-		((int32_t)data->dig_t3)) >> 14;
+		  ((adc_temp >> 4) - ((int32_t)data->dig_t1))) >>
+		 12) *
+		((int32_t)data->dig_t3)) >>
+	       14;
 
-	data->t_fine = var1 + var2;
-	return (data->t_fine * 5 + 128) >> 8;
+	return ((var1 + var2) * 5 + 128) >> 8;
 }
-
 
 int main(void)
 {
@@ -100,42 +71,41 @@ int main(void)
 		printk("I2C bus %s is not ready!\n", dev_i2c.bus->name);
 		return -1;
 	}
-
-
-	bme_calibrationdata(&dev_i2c);
-
 	uint8_t id = 0;
-	uint8_t regs[]= {BME_280_CHIP_ID};
+	uint8_t regs[] = {ID};
 
-	i2c_write_read_dt(&dev_i2c, regs,1,&id, 1);
+	i2c_write_read_dt(&dev_i2c, regs, 1, &id, 1);
 
-	if( id != 0x60 )
-	{
-		printk("Invalid chip id %x \n", id);
+	/* STEP 9 - Verify it is proper device by reading device id  */
+	if (id != 0x60) {
+		printk("Invalid chip id! %x \n", id);
+		return -1;
 	}
 
-	regs[0] = CTRLHUM;
+	/* STEP 10 - Read sensor calibration data*/
+	bme_calibrationdata(&dev_i2c, &bmedata);
 
-	uint8_t  reg_write[] ={CTRLHUM,0x04};
-	i2c_write_dt(&dev_i2c,reg_write,2);
+	/* STEP 11 - Setup the sensor by writing the value 0x93 to the Configuration register */
+	uint8_t sensor_config[] = {CTRLMEAS, 0x93};
 
-	reg_write[0] = CTRLMEAS;
-	reg_write[1] = 0x93;
-
-	i2c_write_dt(&dev_i2c,reg_write,2);
+	i2c_write_dt(&dev_i2c, sensor_config, 2);
 
 	while (1) {
 
-		uint8_t temp_val[3]={0};
-
+		/* STEP 12 - Read the temperature from the sensor */
+		uint8_t temp_val[3] = {0};
 		i2c_burst_read_dt(&dev_i2c, TEMPMSB, temp_val, 3);
 
-		int32_t adc_temp = (temp_val[0] << 12) | (temp_val[1] << 1) | ((temp_val[2] >> 4) & 0x0F);
+		/* STEP 13 - Put the data read from registers into actual order (see datasheet) */
+		int32_t adc_temp =
+			(temp_val[0] << 12) | (temp_val[1] << 1) | ((temp_val[2] >> 4) & 0x0F);
 
+		/* STEP 14 - Compensate temperature */
 		int32_t comp_temp = bme280_compensate_temp(&bmedata, adc_temp);
-		float temperature = (float)comp_temp/100.0f;
 
-		printk("Temperature: %8.2f C \n",(double)temperature);
+		float temperature = (float)comp_temp / 100.0f;
+
+		printk("Temperature: %8.2f C\n", (double)temperature);
 		k_msleep(SLEEP_TIME_MS);
 	}
 }
