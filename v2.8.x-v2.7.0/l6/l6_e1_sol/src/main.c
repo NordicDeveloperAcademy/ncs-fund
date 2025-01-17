@@ -38,7 +38,13 @@ void bme_calibrationdata(const struct i2c_dt_spec *spec, struct bme280_data *sen
 	uint8_t regaddr;
 
 	regaddr = CALIB00;
-	i2c_burst_read_dt(spec, CALIB00, values, 6);
+	int ret = i2c_burst_read_dt(spec, CALIB00, values, 6);
+
+	if (ret != 0) {
+		printk("Failed to read register %x \n", CALIB00);
+		return;
+	}
+
 	sensor_data_ptr->dig_t1 = ((uint16_t)values[1]) << 8 | values[0];
 	sensor_data_ptr->dig_t2 = ((uint16_t)values[3]) << 8 | values[2];
 	sensor_data_ptr->dig_t3 = ((uint16_t)values[5]) << 8 | values[4];
@@ -74,7 +80,12 @@ int main(void)
 	uint8_t id = 0;
 	uint8_t regs[] = {ID};
 
-	i2c_write_read_dt(&dev_i2c, regs, 1, &id, 1);
+	int ret = i2c_write_read_dt(&dev_i2c, regs, 1, &id, 1);
+
+	if (ret != 0) {
+		printk("Failed to read register %x \n", regs[0]);
+		return -1;
+	}
 
 	/* STEP 9 - Verify it is proper device by reading device id  */
 	if (id != 0x60) {
@@ -88,13 +99,25 @@ int main(void)
 	/* STEP 11 - Setup the sensor by writing the value 0x93 to the Configuration register */
 	uint8_t sensor_config[] = {CTRLMEAS, 0x93};
 
-	i2c_write_dt(&dev_i2c, sensor_config, 2);
+	ret = i2c_write_dt(&dev_i2c, sensor_config, 2);
+
+	if (ret != 0) {
+		printk("Failed to write register %x \n", sensor_config[0]);
+		return -1;
+	}
 
 	while (1) {
 
 		/* STEP 12 - Read the temperature from the sensor */
 		uint8_t temp_val[3] = {0};
-		i2c_burst_read_dt(&dev_i2c, TEMPMSB, temp_val, 3);
+
+		int ret = i2c_burst_read_dt(&dev_i2c, TEMPMSB, temp_val, 3);
+
+		if (ret != 0) {
+			printk("Failed to read register %x \n", TEMPMSB);
+			k_msleep(SLEEP_TIME_MS);
+			continue;
+		}
 
 		/* STEP 13 - Put the data read from registers into actual order (see datasheet) */
 		int32_t adc_temp =
