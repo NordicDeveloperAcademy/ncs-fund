@@ -19,6 +19,8 @@
 #define CALIB00	 0x88
 #define ID	 0xD0
 #define TEMPMSB	 0xFA
+#define CHIP_ID  0x60
+#define SENSOR_CONFIG_VALUE 0x93
 
 /* STEP 6 - Get the node identifier of the sensor */
 #define I2C_NODE DT_NODELABEL(mysensor)
@@ -35,9 +37,7 @@ struct bme280_data {
 void bme_calibrationdata(const struct i2c_dt_spec *spec, struct bme280_data *sensor_data_ptr)
 {
 	uint8_t values[6];
-	uint8_t regaddr;
 
-	regaddr = CALIB00;
 	int ret = i2c_burst_read_dt(spec, CALIB00, values, 6);
 
 	if (ret != 0) {
@@ -88,7 +88,7 @@ int main(void)
 	}
 
 	/* STEP 9 - Verify it is proper device by reading device id  */
-	if (id != 0x60) {
+	if (id != CHIP_ID) {
 		printk("Invalid chip id! %x \n", id);
 		return -1;
 	}
@@ -97,7 +97,7 @@ int main(void)
 	bme_calibrationdata(&dev_i2c, &bmedata);
 
 	/* STEP 11 - Setup the sensor by writing the value 0x93 to the Configuration register */
-	uint8_t sensor_config[] = {CTRLMEAS, 0x93};
+	uint8_t sensor_config[] = {CTRLMEAS, SENSOR_CONFIG_VALUE};
 
 	ret = i2c_write_dt(&dev_i2c, sensor_config, 2);
 
