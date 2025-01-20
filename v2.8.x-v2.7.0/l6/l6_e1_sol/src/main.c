@@ -19,6 +19,7 @@
 #define CALIB00	 0x88
 #define ID	 0xD0
 #define TEMPMSB	 0xFA
+
 #define CHIP_ID  0x60
 #define SENSOR_CONFIG_VALUE 0x93
 
@@ -121,7 +122,7 @@ int main(void)
 
 		/* STEP 13 - Put the data read from registers into actual order (see datasheet) */
 		int32_t adc_temp =
-			(temp_val[0] << 12) | (temp_val[1] << 1) | ((temp_val[2] >> 4) & 0x0F);
+			(temp_val[0] << 12) | (temp_val[1] << 4) | ((temp_val[2] >> 4) & 0x0F);
 
 		/* STEP 14 - Compensate temperature */
 		int32_t comp_temp = bme280_compensate_temp(&bmedata, adc_temp);
