@@ -54,18 +54,16 @@ static int32_t bme280_compensate_temp(struct bme280_data *data, int32_t adc_temp
 int main(void)
 {
 
-	int ret;
-
 	/* STEP 7 - Retrieve the API-specific device structure and make sure that the device is
 	 * ready to use  */
 
 	/* STEP 9 - Verify it is proper device by reading device id  */
+	
+	bme_calibrationdata(&dev_i2c, &bmedata);
 
 	/* STEP 11 - Setup the sensor by writing the value 0x93 to the Configuration register */
 
 	while (1) {
-
-		bme_calibrationdata(&dev_i2c, &bmedata);
 
 		/* STEP 12 - Read the temperature from the sensor */
 
