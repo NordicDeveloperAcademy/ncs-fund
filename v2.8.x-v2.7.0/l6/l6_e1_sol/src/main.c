@@ -37,6 +37,8 @@ struct bme280_data {
 /* Read sensor calibration data and stores these into sensor data */
 void bme_calibrationdata(const struct i2c_dt_spec *spec, struct bme280_data *sensor_data_ptr)
 {
+	
+	/* Step 10 - Put calibration function code */
 	uint8_t values[6];
 
 	int ret = i2c_burst_read_dt(spec, CALIB00, values, 6);
@@ -78,6 +80,8 @@ int main(void)
 		printk("I2C bus %s is not ready!\n", dev_i2c.bus->name);
 		return -1;
 	}
+
+	/* STEP 9 - Verify it is proper device by reading device id  */
 	uint8_t id = 0;
 	uint8_t regs[] = {ID};
 
@@ -88,13 +92,11 @@ int main(void)
 		return -1;
 	}
 
-	/* STEP 9 - Verify it is proper device by reading device id  */
 	if (id != CHIP_ID) {
 		printk("Invalid chip id! %x \n", id);
 		return -1;
 	}
 
-	/* STEP 10 - Read sensor calibration data*/
 	bme_calibrationdata(&dev_i2c, &bmedata);
 
 	/* STEP 11 - Setup the sensor by writing the value 0x93 to the Configuration register */
@@ -120,16 +122,21 @@ int main(void)
 			continue;
 		}
 
-		/* STEP 13 - Put the data read from registers into actual order (see datasheet) */
+		/* STEP 12.1 - Put the data read from registers into actual order (see datasheet) */
 		int32_t adc_temp =
 			(temp_val[0] << 12) | (temp_val[1] << 4) | ((temp_val[2] >> 4) & 0x0F);
 
-		/* STEP 14 - Compensate temperature */
+		/* STEP 12.2 - Compensate temperature */
 		int32_t comp_temp = bme280_compensate_temp(&bmedata, adc_temp);
 
+		/* STEP 12.3 - Convert temperature */
 		float temperature = (float)comp_temp / 100.0f;
+		double fTemp = (double)temperature * 1.8 + 32;
 
-		printk("Temperature: %8.2f C\n", (double)temperature);
+		// Print reading to console
+		printk("Temperature in Celsius : %8.2f C\n", (double)temperature);
+		printk("Temperature in Fahrenheit : %.2f F\n", fTemp);
+
 		k_msleep(SLEEP_TIME_MS);
 	}
 }
