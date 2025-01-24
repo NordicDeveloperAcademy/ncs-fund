@@ -8,4 +8,4 @@ jobs:
     - name: image pull
       run: docker pull nordicplayground/nrfconnect-sdk:v2.9-branch
     - name: build sample
-      run: docker run  --rm -v ${{ github.workspace }}:/workdir/project -w /workdir/project/v2.9.0-v2.7.0 nordicplayground/nrfconnect-sdk:v2.9-branch  uname -a
+      run: docker run  --rm -v ${{ github.workspace }}:/workdir/project -w /workdir/project/v2.9.0-v2.7.0 nordicplayground/nrfconnect-sdk:v2.9-branch  west --help
