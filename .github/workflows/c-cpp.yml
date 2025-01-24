@@ -3,10 +3,19 @@ name: C/C++ CI
 on: [push]
 jobs:
   build:
+   strategy:
+      # Don't overwhelm the toolchain server
+      max-parallel: 1
+      matrix:
+        include:
+          - board: nrf5340dk_nrf5340_cpuapp
+          - board: nrf52840dk_nrf52840
+
+            
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: image pull
       run: docker pull nordicplayground/nrfconnect-sdk:v2.9-branch
     - name: build sample
-      run: docker run  --rm -v ${PWD}:/workdir/project -w /workdir/project/v2.9.0-v2.7.0 nordicplayground/nrfconnect-sdk:v2.9-branch  west build l6/l6_e1_sol/ -b nrf5340dk_nrf5340_cpuapp --build-dir build
+      run: docker run  --rm -v ${PWD}:/workdir/project -w /workdir/project/v2.9.0-v2.7.0 nordicplayground/nrfconnect-sdk:v2.9-branch  west build l6/l6_e1_sol/ -b ${{ matrix.board }} --build-dir build
