@@ -4,13 +4,12 @@ on: [push]
 jobs:
   build:
     strategy:
-      # Don't overwhelm the toolchain server
-      max-parallel: 1
+      max-parallel: 100
       matrix:
         include:
         - board: nrf52840dk_nrf52840
         
-        - board: nrf52840dk_nrf52840
+        - board: nrf5340dk_nrf5340_cpuapp
             
     runs-on: ubuntu-latest
     steps:
