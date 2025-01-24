@@ -3,10 +3,8 @@ name: C/C++ CI
 on: [push]
 jobs:
   build:
-
     runs-on: ubuntu-latest
     container: nordicplayground/nrfconnect-sdk:v2.9-branch
-
     steps:
     - name: build
       run: west --help
