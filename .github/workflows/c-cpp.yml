@@ -9,10 +9,8 @@ jobs:
       matrix:
         include:
         - board: nrf52840dk_nrf52840
-        
-        - board: nrf5340dk_nrf5340_cpuapp 
             
-	runs-on: ubuntu-latest
+      runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
     - name: image pull
