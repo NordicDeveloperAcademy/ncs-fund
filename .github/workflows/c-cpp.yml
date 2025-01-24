@@ -7,7 +7,7 @@ jobs:
       max-parallel: 100
       matrix:
           board: [nrf52840dk_nrf52840, nrf5340dk_nrf5340_cpuapp]
-          project: [l6/l6_e1_sol/  l5/l5_e1_sol/]
+          project: [l6/l6_e1_sol/, l5/l5_e1_sol/]
             
     runs-on: ubuntu-latest
     steps:
