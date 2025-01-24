@@ -1,0 +1,19 @@
+name: C/C++ CI
+
+on:
+  push:
+    branches: [ "main" ]
+  pull_request:
+    branches: [ "main" ]
+
+jobs:
+  build:
+
+    runs-on: ubuntu-latest
+    container: nordicplayground/nrfconnect-sdk:v2.9-branch
+
+    steps:
+    - uses: actions/checkout@v4
+    - name: test
+      run: ls
+ 
