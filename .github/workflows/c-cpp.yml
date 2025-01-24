@@ -5,7 +5,7 @@ jobs:
   build:
     runs-on: ubuntu-latest
     steps:
-    - name: build
-      run: docker images
+    - name: image pull
+      run: docker pull nordicplayground/nrfconnect-sdk:v2.9-branch
 
  
