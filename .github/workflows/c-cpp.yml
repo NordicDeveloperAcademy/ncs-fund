@@ -4,8 +4,6 @@ on: [push]
 jobs:
   build:
     runs-on: ubuntu-latest
-    container: 
-      image: nordicplayground/nrfconnect-sdk:v2.9-branch
     steps:
     - name: build
       run: uname -a
