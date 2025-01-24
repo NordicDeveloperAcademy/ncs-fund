@@ -2,15 +2,14 @@ name: C/C++ CI
 
 on: [push]
 jobs:
-	build:
-  	strategy:
+  build:
+    strategy:
       # Don't overwhelm the toolchain server
       max-parallel: 1
       matrix:
         include:
-          - board: nrf5340dk_nrf5340_cpuapp
-          - board: nrf52840dk_nrf52840
-
+        - board: nrf52840dk_nrf52840
+        - board: nrf5340dk_nrf5340_cpuapp 
             
 	runs-on: ubuntu-latest
     steps:
