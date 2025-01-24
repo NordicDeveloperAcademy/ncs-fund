@@ -8,5 +8,6 @@ jobs:
       image: nordicplayground/nrfconnect-sdk:v2.9-branch
     steps:
     - name: build
-      run: docker images
+      run: uname -a
+
  
