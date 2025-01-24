@@ -1,4 +1,4 @@
-// To get started, press Ctrl+Space to bring up the completion menu and view the available nodes.
+	// To get started, press Ctrl+Space to bring up the completion menu and view the available nodes.
 // For more help, browse the DeviceTree documentation at https://docs.zephyrproject.org/latest/guides/dts/index.html
 
 &i2c22 {
@@ -6,10 +6,10 @@
     pinctrl-0 = <&i2c22_default>;
 	pinctrl-1 = <&i2c22_sleep>;
     pinctrl-names = "default", "sleep";
-    mysensor: mysensor@4a{
+    mysensor: mysensor@77{
         compatible = "i2c-device";
         status = "okay";
-        reg = < 0x4a >;
+        reg = < 0x77 >;
     };
 };
 
