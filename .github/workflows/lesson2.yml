@@ -1,4 +1,4 @@
-name: Lesso2
+name: Lesson2
 
 on: [push]
 jobs:
