@@ -1,4 +1,4 @@
-name: C/C++ CI
+name: Lesson3
 
 on: [push]
 jobs:
