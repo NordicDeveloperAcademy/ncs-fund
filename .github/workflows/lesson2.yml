@@ -4,7 +4,7 @@ name: Lesson2
 on:
   push:
     paths:
-      - v2.9.0-v2.7.0/l2/
+      - 'v2.9.0-v2.7.0/l2/'
 
 jobs:
   build:
