@@ -1,6 +1,9 @@
 name: Lesson4
 
-on: [push]
+on:
+  push:
+    paths:
+      - 'v2.9.0-v2.7.0/l4/**'
 jobs:
   build:
     strategy:
