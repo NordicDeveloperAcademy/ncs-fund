@@ -27,7 +27,7 @@ jobs:
       fail-fast: false
       matrix:
           board: [thingy53/nrf5340/cpuapp, thingy53/nrf5340/cpuapp/ns, thingy91/nrf9160/ns]
-          project: [l6/l6_e2_sol/2]
+          project: [l6/l6_e2_sol/]
               
               
           
