@@ -28,7 +28,7 @@ void button_pressed(const struct device *dev, struct gpio_callback *cb, uint32_t
 {
 	int i;
 	long int factorial = 1;
-	
+
 	printk("Calculating the factorials of numbers from 1 to %d:\n", MAX_NUMBER_FACT);
 	for (i = 1; i <= MAX_NUMBER_FACT; i++) {
 		factorial = factorial * i;
