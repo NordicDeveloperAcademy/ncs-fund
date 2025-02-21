@@ -50,22 +50,20 @@
 void button_pressed(const struct device *dev, struct gpio_callback *cb,
 		    uint32_t pins)
 {
-  int i;
-  int j;
-  long int factorial;
-  printk("Calculating the factorials of numbers from 1 to %d:\n",MAX_NUMBER_FACT);
-  for (i=1;i<=MAX_NUMBER_FACT;i++){
-	   factorial =1;
-	    for (j=1;j<=i;j++){
-			factorial = factorial*j;
-		}
-		printk("The factorial of %2d = %ld\n",i,factorial);
-  }
-  printk("_______________________________________________________\n");
-  /*Important note! 
-  Code in ISR runs at a high priority, therefore, it should be written with timing in mind.
-  Too lengthy or too complex tasks should not be performed by an ISR, they should be deferred to a thread. 
-  */
+	int i;
+	long int factorial = 1;
+
+	printk("Calculating the factorials of numbers from 1 to %d:\n", MAX_NUMBER_FACT);
+	for (i = 1; i <= MAX_NUMBER_FACT; i++) {
+		factorial = factorial * i;
+		printk("The factorial of %2d = %ld\n", i, factorial);
+	}
+	printk("_______________________________________________________\n");
+	/*Important note!
+	Code in ISR runs at a high priority, therefore, it should be written with timing in mind.
+	Too lengthy or too complex tasks should not be performed by an ISR, they should be deferred
+	to a thread.
+	*/
 }
 
 static struct gpio_callback button_cb_data;

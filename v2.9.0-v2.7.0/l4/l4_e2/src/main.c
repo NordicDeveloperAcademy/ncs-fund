@@ -26,14 +26,11 @@ static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
 void button_pressed(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
 {
 	int i;
-	int j;
-	long int factorial;
+	long int factorial = 1;
+
 	printk("Calculating the factorials of numbers from 1 to %d:\n", MAX_NUMBER_FACT);
 	for (i = 1; i <= MAX_NUMBER_FACT; i++) {
-		factorial = 1;
-		for (j = 1; j <= i; j++) {
-			factorial = factorial * j;
-		}
+		factorial = factorial * i;
 		printk("The factorial of %2d = %ld\n", i, factorial);
 	}
 	printk("_______________________________________________________\n");
