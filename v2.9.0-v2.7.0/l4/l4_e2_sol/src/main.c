@@ -28,20 +28,17 @@ LOG_MODULE_REGISTER(Less4_Exer2, LOG_LEVEL_DBG);
 void button_pressed(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
 {
 	int i;
-	int j;
-	long int factorial;
-	LOG_INF("Calculating the factorials of numbers 1 to %d:", MAX_NUMBER_FACT);
+	long int factorial = 1;
+
+    LOG_INF("Calculating the factorials of numbers 1 to %d:",MAX_NUMBER_FACT);
 	for (i = 1; i <= MAX_NUMBER_FACT; i++) {
-		factorial = 1;
-		for (j = 1; j <= i; j++) {
-			factorial = factorial * j;
-		}
-		LOG_INF("The factorial of %2d = %ld", i, factorial);
+		factorial = factorial * i;
+        LOG_INF("The factorial of %2d = %ld",i,factorial);
 	}
 	/*Important note!
 	Code in ISR runs at a high priority, therefore, it should be written with timing in mind.
 	Too lengthy or too complex tasks should not be performed by an ISR, they should be deferred
-	to a thread
+	to a thread.
 	*/
 }
 
