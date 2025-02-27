@@ -7,7 +7,10 @@ on:
         description: 'NCS SDK branch'     
         required: true
         default: 'v2.9-branch'
-  
+      toolchain:
+        description: 'Toolchain version'     
+        required: true
+        default: 'v2.9.0'
 jobs:
   build:
     strategy:
@@ -34,6 +37,6 @@ jobs:
       run: |
           docker build -t nordicplayground/nrfconnect-sdk:${{ inputs.sdk }} \
             --build-arg sdk_nrf_branch=${{ inputs.sdk }}  \
-            --build-arg toolchain_version=${{ inputs.sdk }}  \
+            --build-arg toolchain_version=${{ inputs.toolchain }}  \
     - name: build sample
       run: docker run  --rm -v ${PWD}:/workdir/project -w /workdir/project/v2.9.0-v2.7.0 nordicplayground/nrfconnect-sdk:${{ inputs.sdk }}   west build -c ${{ matrix.project }} -b ${{ matrix.board }} --build-dir ${{ matrix.project }}/build
