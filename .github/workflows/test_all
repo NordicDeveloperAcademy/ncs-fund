@@ -1,0 +1,41 @@
+name: test_all 
+
+on:
+  workflow_dispatch:
+    inputs:
+      sdk:
+        description: 'NCS SDK branch'     
+        required: true
+        default: 'v2.9-branch'
+
+jobs:
+  pull:
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: image pull
+      run: docker pull ghcr.io/lukaszbielaknordicsemi/nordicplayground/nrfconnect-sdk:${{ inputs.sdk }}
+    
+  build:
+    strategy:
+      max-parallel: 100
+      matrix:
+          board: [nrf7002dk/nrf5340/cpuapp, nrf7002dk/nrf5340/cpuapp/ns, nrf54l15dk/nrf54l15/cpuapp, nrf54l15dk/nrf54l15/cpuapp/ns, nrf52dk/nrf52832, nrf52840dk/nrf52840, nrf5340dk/nrf5340/cpuapp, nrf5340dk/nrf5340/cpuapp/ns, nrf9151dk/nrf9151/ns, nrf9160dk/nrf9160, nrf9160dk/nrf9160/ns, nrf9161dk/nrf9161, nrf9161dk/nrf9161/ns, nrf52833dk/nrf52833, nrf52840dk/nrf52840 ]
+          project: [l2/l2_e1_sol, l2/l2_e2_sol, l3/l3_e1_sol, l3/l3_e2_sol, l4/l4_e1_sol, l4/l4_e2_sol, l4/l4_e3_sol, l5/l5_e1_sol/, l6/l6_e1_sol/, l6/l6_e2_sol/, l7/l7_e1_sol, l7/l7_e2_sol, l7/l7_e3_sol, l8/l8_e1_sol/, l8/l8_e2_sol/ ]
+          exclude:
+            - project: l6/l6_e2_sol/
+          include:
+              - board: thingy53/nrf5340/cpuapp 
+                project: l6/l6_e2_sol/
+              - board: thingy53/nrf5340/cpuapp/ns
+                project: l6/l6_e2_sol/
+              - board: thingy91/nrf9160/ns
+                project: l6/l6_e2_sol/
+              
+              
+          
+    runs-on: ubuntu-latest
+    steps:
+    - uses: actions/checkout@v3
+    - name: build sample
+      run: docker run  --rm -v ${PWD}:/workdir/project -w /workdir/project/v2.9.0-v2.7.0 ghcr.io/lukaszbielaknordicsemi/nordicplayground/nrfconnect-sdk:${{ inputs.sdk }}   west build -c ${{ matrix.project }} -b ${{ matrix.board }} --build-dir ${{ matrix.project }}/build
