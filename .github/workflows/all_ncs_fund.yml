@@ -7,10 +7,7 @@ on:
         description: 'NCS SDK branch'     
         required: true
         default: 'v2.9-branch'
-      toolchain:
-        description: 'Toolchain version'     
-        required: true
-        default: 'v2.9.0'
+
 jobs:
   build:
     strategy:
@@ -33,10 +30,7 @@ jobs:
     runs-on: ubuntu-latest
     steps:
     - uses: actions/checkout@v3
-    - name: image build
-      run: |
-          docker build -t nordicplayground/nrfconnect-sdk:${{ inputs.sdk }} \
-            --build-arg sdk_nrf_branch=${{ inputs.sdk }}  \
-            --build-arg toolchain_version=${{ inputs.toolchain }}  .
+    - name: image pull
+      run: docker pull ghcr.io/lukaszbielaknordicsemi/nordicplayground/nrfconnect-sdk:${{ inputs.sdk }}
     - name: build sample
-      run: docker run  --rm -v ${PWD}:/workdir/project -w /workdir/project/v2.9.0-v2.7.0 nordicplayground/nrfconnect-sdk:${{ inputs.sdk }}   west build -c ${{ matrix.project }} -b ${{ matrix.board }} --build-dir ${{ matrix.project }}/build
+      run: docker run  --rm -v ${PWD}:/workdir/project -w /workdir/project/v2.9.0-v2.7.0 ghcr.io/lukaszbielaknordicsemi/nordicplayground/nrfconnect-sdk:${{ inputs.sdk }}   west build -c ${{ matrix.project }} -b ${{ matrix.board }} --build-dir ${{ matrix.project }}/build
