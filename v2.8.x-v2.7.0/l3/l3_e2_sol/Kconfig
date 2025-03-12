@@ -6,6 +6,7 @@
 
 source "Kconfig.zephyr"
 
+# STEP 6 - Define a custom Kconfig for enabling myfunction
 config MYFUNCTION
 	bool "Enable my function"
 	default n

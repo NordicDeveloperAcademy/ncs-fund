@@ -10,4 +10,7 @@ find_package(Zephyr REQUIRED HINTS $ENV{ZEPHYR_BASE})
 project(nrf_connect_sdk_fundamentals)
 
 target_sources(app PRIVATE src/main.c)
+# STEP 3 - Include the custom files in the build
+#target_sources(app PRIVATE src/myfunction.c)
+# STEP 7 - Make the addition of custiom files conditional
 target_sources_ifdef(CONFIG_MYFUNCTION app PRIVATE src/myfunction.c)
