@@ -24,10 +24,11 @@ int main(void)
 		printk("The sum of %d and %d is %d\n", a, b, sum(a, b));
 #else
 		printk("MYFUNCTION not enabled\n");
-		return;
+		return 0;
 #endif
 		k_msleep(1000);
 	}
+	return 0;
 }
 
 /* STEP 5 - Change main() to run the custom function */
