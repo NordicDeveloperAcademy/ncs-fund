@@ -1,0 +1,31 @@
+// To get started, press Ctrl+Space to bring up the completion menu and view the available nodes.
+// For more help, browse the DeviceTree documentation at https://docs.zephyrproject.org/latest/guides/dts/index.html
+
+&i2c1 {
+    status = "okay";
+    pinctrl-0 = <&i2c1_default>;
+	pinctrl-1 = <&i2c1_sleep>;
+    pinctrl-names = "default", "sleep";
+    mysensor: mysensor@77{
+        compatible = "i2c-device";
+        status = "okay";
+        reg = < 0x77 >;
+    };
+};
+
+&pinctrl {
+	/omit-if-no-ref/ i2c1_default: i2c1_default {
+		group1  {
+			psels = <NRF_PSEL(TWIM_SCL, 1, 14)>,
+					<NRF_PSEL(TWIM_SDA, 1, 15)>;
+		};
+	};
+
+	/omit-if-no-ref/ i2c1_sleep: i2c1_sleep {
+		group1  {
+			psels = <NRF_PSEL(TWIM_SCL, 1, 14)>,
+					<NRF_PSEL(TWIM_SDA, 1, 15)>;
+			low-power-enable;
+		};
+	};
+};

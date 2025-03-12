@@ -9,7 +9,6 @@
 #include <zephyr/devicetree.h>
 #include <zephyr/drivers/gpio.h>
 #include <zephyr/sys/printk.h>
-/* STEP 4 - Include the header file of the logger module */
 #include <zephyr/logging/log.h>
 
 #define MAX_NUMBER_FACT 10
@@ -21,10 +20,8 @@ static const struct gpio_dt_spec button = GPIO_DT_SPEC_GET(SW0_NODE, gpios);
 #define LED0_NODE DT_ALIAS(led0)
 static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
 
-/* STEP 5 - Register your code with the logger */
-LOG_MODULE_REGISTER(Less4_Exer2, LOG_LEVEL_DBG);
+LOG_MODULE_REGISTER(Less4_Exer3, LOG_LEVEL_DBG);
 
-/* STEP 7 - Replace the callback function button_pressed() */
 void button_pressed(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
 {
 	int i;
@@ -42,20 +39,20 @@ void button_pressed(const struct device *dev, struct gpio_callback *cb, uint32_t
 	*/
 }
 
+
 static struct gpio_callback button_cb_data;
 
 int main(void)
 {
 	int ret;
-	/* STEP 6 - Write some logs */
-	int exercise_num = 2;
+	int exercise_num = 3;
 	uint8_t data[] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 'H', 'e', 'l', 'l', 'o'};
 	// Printf-like messages
 	LOG_INF("nRF Connect SDK Fundamentals");
 	LOG_INF("Exercise %d", exercise_num);
 	LOG_DBG("A log message in debug level");
 	LOG_WRN("A log message in warning level!");
-	LOG_ERR("A log message in Error level!");
+	LOG_ERR("A log message in error level!");
 	// Hexdump some data
 	LOG_HEXDUMP_INF(data, sizeof(data), "Sample Data!");
 
