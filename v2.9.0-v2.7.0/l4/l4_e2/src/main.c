@@ -20,7 +20,8 @@ static const struct gpio_dt_spec button = GPIO_DT_SPEC_GET(SW0_NODE, gpios);
 #define LED0_NODE DT_ALIAS(led0)
 static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
 
-/* STEP 5 - Register your code with the logger */
+/* STEP 5 - Register your code with the logger module */
+
 
 /* STEP 7 - Replace the callback function button_pressed() */
 void button_pressed(const struct device *dev, struct gpio_callback *cb, uint32_t pins)
@@ -46,8 +47,8 @@ static struct gpio_callback button_cb_data;
 int main(void)
 {
 	int ret;
-	/* STEP 6 - Write some logs */
-	printk("nRF Connect SDK Fundamentals - Lesson 4 - Exercise 1\n");
+	/* STEP 6 - Print logging information */
+	
 
 	/* Only checking one since led.port and button.port point to the same device, &gpio0 */
 	if (!device_is_ready(led.port)) {

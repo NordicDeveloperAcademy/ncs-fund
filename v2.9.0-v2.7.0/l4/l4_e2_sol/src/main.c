@@ -21,7 +21,7 @@ static const struct gpio_dt_spec button = GPIO_DT_SPEC_GET(SW0_NODE, gpios);
 #define LED0_NODE DT_ALIAS(led0)
 static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
 
-/* STEP 5 - Register your code with the logger */
+/* STEP 5 - Register your code with the logger module */
 LOG_MODULE_REGISTER(Less4_Exer2, LOG_LEVEL_DBG);
 
 /* STEP 7 - Replace the callback function button_pressed() */
@@ -47,7 +47,7 @@ static struct gpio_callback button_cb_data;
 int main(void)
 {
 	int ret;
-	/* STEP 6 - Write some logs */
+	/* STEP 6 - Print logging information */
 	int exercise_num = 2;
 	uint8_t data[] = {0x00, 0x01, 0x02, 0x03, 0x04, 0x05, 0x06, 0x07, 'H', 'e', 'l', 'l', 'o'};
 	// Printf-like messages
