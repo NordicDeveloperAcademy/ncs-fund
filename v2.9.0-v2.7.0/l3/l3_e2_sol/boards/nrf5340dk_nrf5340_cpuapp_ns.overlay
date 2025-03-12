@@ -1,0 +1,4 @@
+/* STEP 13 - Change the baud rate for uart0 */
+&uart0 {
+	current-speed = <9600>;
+};
