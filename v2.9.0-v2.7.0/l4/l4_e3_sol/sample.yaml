@@ -24,4 +24,4 @@ common:
       - native_sim
     
 tests:
-  app.default: {}
+  l4.e3_sol: {}

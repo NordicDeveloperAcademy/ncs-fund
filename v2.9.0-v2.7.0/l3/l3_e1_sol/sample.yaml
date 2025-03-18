@@ -1,5 +1,5 @@
 sample:
-  name: Lesson 3 Exercise 1 
+  name: Lesson 3 Exercise 1 Solution
   
 common: 
     sysbuild: true
@@ -24,4 +24,4 @@ common:
       - native_sim
     
 tests:
-  app.default: {}
+  l3.e1_sol: {}
