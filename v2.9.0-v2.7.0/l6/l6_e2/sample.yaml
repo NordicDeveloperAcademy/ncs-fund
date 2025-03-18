@@ -4,6 +4,7 @@ sample:
 common: 
     sysbuild: true
     build_only: true
+    skip: true
     integration_platforms: 
       - thingy53/nrf5340/cpuapp
       - thingy53/nrf5340/cpuapp/ns

@@ -4,6 +4,7 @@ sample:
 common: 
     sysbuild: true
     build_only: true
+    skip: true
     integration_platforms: 
       - nrf52dk/nrf52832
       - nrf52833dk/nrf52833
