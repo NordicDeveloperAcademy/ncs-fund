@@ -26,7 +26,7 @@ static struct k_work_q offload_work_q = {0};
 /* STEP 5 - Define function to emulate non-urgent work */
 static inline void emulate_work()
 {
-	for (volatile int count_out = 0; count_out < 150000; count_out++)
+	for (volatile int count_out = 0; count_out < 300000; count_out++)
 		;
 }
 
