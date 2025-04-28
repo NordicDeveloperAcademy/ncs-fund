@@ -17,7 +17,7 @@ jobs:
         directories=()
         while IFS= read -r dir; do
           directories+=("$dir")
-        done < <(find . -type d -name "*_sol")
+        done < <(find . -type d -name "*_sol" | sed 's|^\./||')
         echo "::set-output name=dirs::${directories[*]}"
 
     - name: Check if changed files are in the directories recursively
