@@ -1,0 +1,37 @@
+name: Find Exercise directories
+on: [push]
+
+jobs:
+  find-and-check-directories:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Checkout repository
+      uses: actions/checkout@v2
+
+    - name: Find directories and print
+      id: find_dirs
+      run: |
+        directories=()
+        while IFS= read -r dir; do
+          directories+=("$dir")
+        done < <(find . -type d -name "*_sol")
+        echo "::set-output name=dirs::${directories[*]}"
+
+    - name: Check if changed files are in the directories recursively
+      run: |
+        directories=(${{ steps.find_dirs.outputs.dirs }})
+        echo "Directories: ${directories[@]}"
+        git diff --name-only ${{ github.event.before }} ${{ github.event.after }} | while read file; do
+          path_found=false
+          for dir in "${directories[@]}"; do
+            if [[ "$file" == "$dir"* ]]; then
+              echo "Changed file $file is in directory $dir"
+              path_found=true
+              break
+            fi
+          done
+          if [[ "$path_found" == false ]]; then
+            echo "Changed file $file is not in any specified directory"
+          fi
+        done
