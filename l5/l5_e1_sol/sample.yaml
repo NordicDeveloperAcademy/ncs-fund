@@ -23,4 +23,4 @@ common:
       - native_sim
     
 tests:
-  l5.e1_sol: {}
+  ncs_fund.l5.e1_sol: {}

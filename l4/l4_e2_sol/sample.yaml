@@ -25,4 +25,4 @@ common:
       - native_sim
     
 tests:
-  l4.e2_sol: {}
+  ncs_fund.l4.e2_sol: {}

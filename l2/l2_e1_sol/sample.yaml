@@ -27,4 +27,4 @@ common:
       - native_sim
     
 tests:
-  l2.e1_sol: {}
+  ncs_fund.l2.e1_sol: {}
