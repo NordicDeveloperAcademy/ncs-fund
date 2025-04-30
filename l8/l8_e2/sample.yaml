@@ -26,4 +26,4 @@ common:
       - native_sim
     
 tests:
-  l8.e2: {}
+  ncs_fund.l8.e2: {}
