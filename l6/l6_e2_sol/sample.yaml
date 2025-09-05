@@ -8,6 +8,10 @@ common:
       - thingy53/nrf5340/cpuapp
       - thingy53/nrf5340/cpuapp/ns
       - thingy91/nrf9160/ns
+    platform_allow: 
+      - thingy53/nrf5340/cpuapp
+      - thingy53/nrf5340/cpuapp/ns
+      - thingy91/nrf9160/ns
 
     platform_exclude:
       - native_sim
