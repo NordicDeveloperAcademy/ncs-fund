@@ -16,6 +16,25 @@ common:
       - nrf5340dk/nrf5340/cpuapp/ns
       - nrf54l15dk/nrf54l15/cpuapp
       - nrf54l15dk/nrf54l15/cpuapp/ns
+      - nrf54lm20dk/nrf54lm20a/cpuapp
+      - nrf7002dk/nrf5340/cpuapp
+      - nrf7002dk/nrf5340/cpuapp/ns
+      - thingy53/nrf5340/cpuapp
+      - thingy53/nrf5340/cpuapp/ns
+      - thingy91/nrf9160/ns
+      - thingy91x/nrf9151/ns
+    platform_allow:
+      - nrf52dk/nrf52832
+      - nrf52833dk/nrf52833
+      - nrf52840dk/nrf52840
+      - nrf9160dk/nrf9160/ns
+      - nrf9161dk/nrf9161/ns
+      - nrf9151dk/nrf9151/ns
+      - nrf5340dk/nrf5340/cpuapp
+      - nrf5340dk/nrf5340/cpuapp/ns
+      - nrf54l15dk/nrf54l15/cpuapp
+      - nrf54l15dk/nrf54l15/cpuapp/ns
+      - nrf54lm20dk/nrf54lm20a/cpuapp
       - nrf7002dk/nrf5340/cpuapp
       - nrf7002dk/nrf5340/cpuapp/ns
       - thingy53/nrf5340/cpuapp
