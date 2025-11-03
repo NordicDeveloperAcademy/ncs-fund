@@ -26,17 +26,17 @@
 // Function for getting access of resource
 void get_access(void)
 {
-	/* STEP 10.1 - Get semaphore before access to the resource */
+	/* STEP 10.1 - Take semaphore when getting access to the resource */
 
-	/* STEP 6.1 - Decrement available resource */
+	/* STEP 6.1 - Decrement available resource */	
 }
 
 // Function for releasing access of resource
 void release_access(void)
 {
-	/* STEP 6.2 - Increment available resource */
+	/* STEP 10.2 - Give semaphore when releasing access to resource */
 
-	/* STEP 10.2 - Give semaphore after finishing access to resource */
+	/* STEP 6.2 - Increment available resource */	
 }
 
 /* STEP 4 - Producer thread relinquishing access to instance */
