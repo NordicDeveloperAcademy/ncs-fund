@@ -33,51 +33,51 @@ K_MUTEX_DEFINE(test_mutex);
 // Shared code run by both threads
 void shared_code_section(void)
 {
-	/* STEP 12.1 - Lock the mutex */
-	k_mutex_lock(&test_mutex, K_FOREVER);
+    /* STEP 12.1 - Lock the mutex */
+    k_mutex_lock(&test_mutex, K_FOREVER);
 
-	/* STEP 6 - Increment count and decrement count changed */
-	/* according to logic defined in exercise text */
-	increment_count += 1;
-	increment_count = increment_count % COMBINED_TOTAL;
+    /* STEP 6 - Increment count and decrement count changed */
+    /* according to logic defined in exercise text */
+    increment_count += 1;
+    increment_count = increment_count % COMBINED_TOTAL;
 
-	decrement_count -= 1;
-	if (decrement_count == 0) {
-		decrement_count = COMBINED_TOTAL;
-	}
+    decrement_count -= 1;
+    if (decrement_count == 0) {
+        decrement_count = COMBINED_TOTAL;
+    }
 
-	/* STEP 12.2 - Unlock the mutex */
-	k_mutex_unlock(&test_mutex);
+    /* STEP 12.2 - Unlock the mutex */
+    k_mutex_unlock(&test_mutex);
 
-	/* STEP 7 - Print counter values if they do not add up to COMBINED_TOTAL */
-	if (increment_count + decrement_count != COMBINED_TOTAL) {
-		printk("Race condition happend!\n");
-		printk("Increment_count (%d) + Decrement_count (%d) = %d \n", increment_count,
-		       decrement_count, (increment_count + decrement_count));
-		k_msleep(400 + sys_rand32_get() % 10);
-	}
+    /* STEP 7 - Print counter values if they do not add up to COMBINED_TOTAL */
+    if (increment_count + decrement_count != COMBINED_TOTAL) {
+        printk("Race condition happend!\n");
+        printk("Increment_count (%d) + Decrement_count (%d) = %d \n", increment_count,
+               decrement_count, (increment_count + decrement_count));
+        k_msleep(400 + sys_rand32_get() % 10);
+    }
 }
 
 /* STEP 4 - Functions for thread0 and thread1 with a shared code section */
 void thread0(void)
 {
-	printk("Thread 0 started\n");
-	while (1) {
-		shared_code_section();
-	}
+    printk("Thread 0 started\n");
+    while (1) {
+        shared_code_section();
+    }
 }
 
 void thread1(void)
 {
-	printk("Thread 1 started\n");
-	while (1) {
-		shared_code_section();
-	}
+    printk("Thread 1 started\n");
+    while (1) {
+        shared_code_section();
+    }
 }
 
 // Define and initialize threads
 K_THREAD_DEFINE(thread0_id, THREAD0_STACKSIZE, thread0, NULL, NULL, NULL, THREAD0_PRIORITY, 0,
-		5000);
+        5000);
 
 K_THREAD_DEFINE(thread1_id, THREAD1_STACKSIZE, thread1, NULL, NULL, NULL, THREAD1_PRIORITY, 0,
-		5000);
+        5000);
