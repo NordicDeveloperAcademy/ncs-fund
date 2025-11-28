@@ -46,9 +46,6 @@ void shared_code_section(void)
         decrement_count = COMBINED_TOTAL;
     }
 
-    /* STEP 12.2 - Unlock the mutex */
-    k_mutex_unlock(&test_mutex);
-
     /* STEP 7 - Print counter values if they do not add up to COMBINED_TOTAL */
     if (increment_count + decrement_count != COMBINED_TOTAL) {
         printk("Race condition happend!\n");
@@ -56,6 +53,9 @@ void shared_code_section(void)
                decrement_count, (increment_count + decrement_count));
         k_msleep(400 + sys_rand32_get() % 10);
     }
+
+    /* STEP 12.2 - Unlock the mutex */
+    k_mutex_unlock(&test_mutex);
 }
 
 /* STEP 4 - Functions for thread0 and thread1 with a shared code section */
