@@ -33,6 +33,8 @@ K_MUTEX_DEFINE(test_mutex);
 // Shared code run by both threads
 void shared_code_section(void)
 {
+    uint8_t race_condition = 0;
+    
     /* STEP 12.1 - Lock the mutex */
     k_mutex_lock(&test_mutex, K_FOREVER);
 
@@ -48,14 +50,17 @@ void shared_code_section(void)
 
     /* STEP 7 - Print counter values if they do not add up to COMBINED_TOTAL */
     if (increment_count + decrement_count != COMBINED_TOTAL) {
+        race_condition = 1;
+    }
+    /* STEP 12.2 - Unlock the mutex */
+    k_mutex_unlock(&test_mutex);
+
+    if( race_condition ){
         printk("Race condition happend!\n");
         printk("Increment_count (%d) + Decrement_count (%d) = %d \n", increment_count,
                decrement_count, (increment_count + decrement_count));
         k_msleep(400 + sys_rand32_get() % 10);
     }
-
-    /* STEP 12.2 - Unlock the mutex */
-    k_mutex_unlock(&test_mutex);
 }
 
 /* STEP 4 - Functions for thread0 and thread1 with a shared code section */

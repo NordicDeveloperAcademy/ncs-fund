@@ -31,9 +31,10 @@ void shared_code_section(void)
     /* STEP 6 - Increment count and decrement count changed */
     /* according to logic defined in exercise text */
 
+    /* STEP 12.2 - Unlock the mutex */
+
     /* STEP 7 - Print counter values if they do not add up to COMBINED_TOTAL */
 
-    /* STEP 12.2 - Unlock the mutex */
 }
 
 /* STEP 4 - Functions for thread0 and thread1 with a shared code section */
