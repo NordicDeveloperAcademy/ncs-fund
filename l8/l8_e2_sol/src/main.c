@@ -34,7 +34,9 @@ K_MUTEX_DEFINE(test_mutex);
 void shared_code_section(void)
 {
     uint8_t race_condition = 0;
-    
+    int32_t increment_count_copy = 0;
+    int32_t decrement_count_copy = 0;
+
     /* STEP 12.1 - Lock the mutex */
     k_mutex_lock(&test_mutex, K_FOREVER);
 
@@ -48,17 +50,22 @@ void shared_code_section(void)
         decrement_count = COMBINED_TOTAL;
     }
 
-    /* STEP 7 - Print counter values if they do not add up to COMBINED_TOTAL */
+    /* STEP 7 - Detect race condition if the values of the counters do not add up to COMBINED_TOTAL */
     if (increment_count + decrement_count != COMBINED_TOTAL) {
         race_condition = 1;
+
+        /* STEP 12.2 - Copy the values of the counters*/
+        increment_count_copy = increment_count;
+        decrement_count_copy = decrement_count;
     }
-    /* STEP 12.2 - Unlock the mutex */
+    /* STEP 12.3 - Unlock the mutex */
     k_mutex_unlock(&test_mutex);
 
+    /* STEP 12.4 - Use copies of the counters */
     if( race_condition ){
         printk("Race condition happend!\n");
-        printk("Increment_count (%d) + Decrement_count (%d) = %d \n", increment_count,
-               decrement_count, (increment_count + decrement_count));
+        printk("Increment_count (%d) + Decrement_count (%d) = %d \n", increment_count_copy,
+            decrement_count_copy, (increment_count_copy + decrement_count_copy));
         k_msleep(400 + sys_rand32_get() % 10);
     }
 }

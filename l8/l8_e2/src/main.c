@@ -31,9 +31,13 @@ void shared_code_section(void)
     /* STEP 6 - Increment count and decrement count changed */
     /* according to logic defined in exercise text */
 
+    /* STEP 7 - Detect race condition if the values of the counters do not add up to COMBINED_TOTAL */
+
+    /* STEP 12.2 - Copy the values of the counters*/
+
     /* STEP 12.2 - Unlock the mutex */
 
-    /* STEP 7 - Print counter values if they do not add up to COMBINED_TOTAL */
+    /* STEP 12.4  - Print counter values (copied) if they do not add up to COMBINED_TOTAL */
 
 }
 
