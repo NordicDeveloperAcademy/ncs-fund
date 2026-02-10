@@ -13,8 +13,6 @@ common:
       - thingy53/nrf5340/cpuapp/ns
       - thingy91/nrf9160/ns
 
-    platform_exclude:
-      - native_sim
     
 tests:
   ncs_fund.l6.e2_sol: {}

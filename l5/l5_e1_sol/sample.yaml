@@ -36,8 +36,6 @@ common:
       - nrf7002dk/nrf5340/cpuapp/ns
       - thingy91/nrf9160/ns
       - thingy91x/nrf9151/ns
-    platform_exclude:
-      - native_sim
     
 tests:
   ncs_fund.l5.e1_sol: {}
