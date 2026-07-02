@@ -17,9 +17,7 @@ common:
       - nrf54lm20dk/nrf54lm20a/cpuapp
       - nrf54ls05dk/nrf54ls05b/cpuapp
       - nrf7002dk/nrf5340/cpuapp
-      - thingy53/nrf5340/cpuapp
-      - thingy91/nrf9160/ns
-      - thingy91x/nrf9151/ns
+
     platform_allow:
       - nrf52dk/nrf52832
       - nrf52833dk/nrf52833
@@ -33,9 +31,6 @@ common:
       - nrf54lm20dk/nrf54lm20a/cpuapp
       - nrf54ls05dk/nrf54ls05b/cpuapp
       - nrf7002dk/nrf5340/cpuapp
-      - thingy53/nrf5340/cpuapp
-      - thingy91/nrf9160/ns
-      - thingy91x/nrf9151/ns
     
 tests:
   ncs_fund.l6.e1_sol: {}
