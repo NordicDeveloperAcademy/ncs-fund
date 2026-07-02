@@ -28,6 +28,7 @@
 
 int main(void)
 {
+	printk("Starting Lesson 6 - Exercise 2\n");
 
 	int ret;
 

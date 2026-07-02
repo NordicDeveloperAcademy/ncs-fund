@@ -71,6 +71,7 @@ static int32_t bme280_compensate_temp(struct bme280_data *data, int32_t adc_temp
 
 int main(void)
 {
+	printk("Starting Lesson 6 - Exercise 1\n");
 
 	/* STEP 7 - Retrieve the API-specific device structure and make sure that the device is
 	 * ready to use  */

@@ -3,16 +3,19 @@ sample:
   
 common: 
     sysbuild: true
-    build_only: true
     integration_platforms: 
       - thingy53/nrf5340/cpuapp
-      - thingy53/nrf5340/cpuapp/ns
-      - thingy91/nrf9160/ns
+      - thingy91/nrf9160
     platform_allow: 
       - thingy53/nrf5340/cpuapp
-      - thingy53/nrf5340/cpuapp/ns
-      - thingy91/nrf9160/ns
+      - thingy91/nrf9160
 
     
 tests:
-  ncs_fund.l6.e2_sol: {}
+  ncs_fund.l6.e2_sol:
+    harness: console
+    harness_config:
+      type: one_line
+      regex:
+        - "Starting Lesson 6 - Exercise 2"
+    timeout: 15

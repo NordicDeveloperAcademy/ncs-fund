@@ -87,6 +87,12 @@ void thread1(void)
     }
 }
 
+int main(void)
+{
+	printk("Starting Lesson 8 - Exercise 2\n");
+	return 0;
+}
+
 // Define and initialize threads
 K_THREAD_DEFINE(thread0_id, THREAD0_STACKSIZE, thread0, NULL, NULL, NULL, THREAD0_PRIORITY, 0,
         5000);

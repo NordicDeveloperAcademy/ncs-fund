@@ -10,6 +10,7 @@
 #include <zephyr/device.h>
 #include <zephyr/devicetree.h>
 #include <zephyr/drivers/gpio.h>
+#include <zephyr/sys/printk.h>
 
 /* STEP 9 - Increase the sleep time from 100ms to 10 minutes  */
 #define SLEEP_TIME_MS 10 * 60 * 1000
@@ -33,6 +34,8 @@ static struct gpio_callback button_cb_data;
 int main(void)
 {
 	int ret;
+
+	printk("Starting Lesson 2 - Exercise 2\n");
 
 	if (!device_is_ready(led.port)) {
 		return -1;

@@ -8,6 +8,7 @@
 #include <zephyr/device.h>
 #include <zephyr/devicetree.h>
 #include <zephyr/drivers/gpio.h>
+#include <zephyr/sys/printk.h>
 
 /* STEP 7 - Change the sleep time from 1000 ms to 100 ms */
 #define SLEEP_TIME_MS 100
@@ -26,6 +27,8 @@ static const struct gpio_dt_spec led = GPIO_DT_SPEC_GET(LED0_NODE, gpios);
 int main(void)
 {
 	int ret;
+
+	printk("Starting Lesson 2 - Exercise 1\n");
 
 	if (!device_is_ready(led.port)) {
 		return -1;

@@ -114,6 +114,8 @@ int main(void)
 {
     int ret;
 
+    printk("Starting Lesson 5 - Exercise 1\n");
+
     /* STEP 4.2 - Verify that the UART device is ready */
     if (!device_is_ready(uart)) {
         printk("UART device not ready\n");

@@ -18,6 +18,7 @@
 /* STEP 9.2 - Check CONFIG_MYFUNCTION before calling sum() */
 int main(void)
 {
+	printk("Starting Lesson 3 - Exercise 2\n");
 	while (1) {
 #ifdef CONFIG_MYFUNCTION
 		int a = 3, b = 4;
