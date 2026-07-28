@@ -10,4 +10,3 @@ jobs:
     uses: lubiel-nordic/workflows/.github/workflows/build_all.yml@main
     with:
       repo_name: "ncs-fund"
-      toolchain: "latest"
