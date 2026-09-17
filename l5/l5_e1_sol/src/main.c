@@ -40,6 +40,8 @@ static const struct gpio_dt_spec led2 = GPIO_DT_SPEC_GET(DT_ALIAS(led2), gpios);
 #if defined(CONFIG_BOARD_NRF54L15DK_NRF54L15_CPUAPP) || defined(CONFIG_BOARD_NRF54L15DK_NRF54L15_CPUAPP_NS) ||  \
     defined(CONFIG_BOARD_NRF54LM20DK_NRF54LM20A_CPUAPP)  || defined(CONFIG_BOARD_NRF54LS05DK_NRF54LS05B_CPUAPP)
 const struct device *uart = DEVICE_DT_GET(DT_NODELABEL(uart20));
+#elif defined(CONFIG_BOARD_NRF54LC10DK_NRF54LC10A_CPUAPP) || defined(CONFIG_BOARD_NRF54LC10DK_NRF54LC10A_CPUAPP_NS)
+const struct device *uart = DEVICE_DT_GET(DT_NODELABEL(uart30));
 #else
 const struct device *uart = DEVICE_DT_GET(DT_NODELABEL(uart0));
 #endif
@@ -50,8 +52,9 @@ static uint8_t tx_buf[] = {
 #if defined(CONFIG_BOARD_NRF7002DK_NRF5340_CPUAPP) || defined(CONFIG_BOARD_NRF7002DK_NRF5340_CPUAPP_NS)
     "nRF Connect SDK Fundamentals Course\r\n"
     "Press 1-2 on your keyboard to toggle LEDS 1-2 on your development kit\r\n"};
-#elif defined(CONFIG_BOARD_NRF54L15DK_NRF54L15_CPUAPP) || defined(CONFIG_BOARD_NRF54L15DK_NRF54L15_CPUAPP_NS) || \
-      defined(CONFIG_BOARD_NRF54LM20DK_NRF54LM20A_CPUAPP)  || defined(CONFIG_BOARD_NRF54LS05DK_NRF54LS05B_CPUAPP)
+#elif defined(CONFIG_BOARD_NRF54L15DK_NRF54L15_CPUAPP) || defined(CONFIG_BOARD_NRF54L15DK_NRF54L15_CPUAPP_NS) ||    \
+      defined(CONFIG_BOARD_NRF54LM20DK_NRF54LM20A_CPUAPP)  || defined(CONFIG_BOARD_NRF54LS05DK_NRF54LS05B_CPUAPP) || \
+      defined(CONFIG_BOARD_NRF54LC10DK_NRF54LC10A_CPUAPP) || defined(CONFIG_BOARD_NRF54LC10DK_NRF54LC10A_CPUAPP_NS)
     "nRF Connect SDK Fundamentals Course\r\n"
     "Press 0-2 on your keyboard to toggle LEDS 0-2 on your development kit\r\n"};
 #else
@@ -78,7 +81,9 @@ static void uart_cb(const struct device *dev, struct uart_event *evt, void *user
             }
         }
     #elif defined(CONFIG_BOARD_NRF54L15DK_NRF54L15_CPUAPP) || defined(CONFIG_BOARD_NRF54L15DK_NRF54L15_CPUAPP_NS) || \
-          defined(CONFIG_BOARD_NRF54LM20DK_NRF54LM20A_CPUAPP) || defined(CONFIG_BOARD_NRF54LS05DK_NRF54LS05B_CPUAPP)
+          defined(CONFIG_BOARD_NRF54LM20DK_NRF54LM20A_CPUAPP) || defined(CONFIG_BOARD_NRF54LS05DK_NRF54LS05B_CPUAPP) || \
+          defined(CONFIG_BOARD_NRF54LC10DK_NRF54LC10A_CPUAPP) || defined(CONFIG_BOARD_NRF54LC10DK_NRF54LC10A_CPUAPP_NS)
+
         if ((evt->data.rx.len) == 1) {
             if (evt->data.rx.buf[evt->data.rx.offset] == '0') {
                 gpio_pin_toggle_dt(&led0);
