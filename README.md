@@ -7,10 +7,11 @@ In the course, you will learn how to develop portable RTOS-based applications th
 
 This repository contains the exercise code base and solutions. Make sure to select the branch that corresponds with the nRF Connect SDK version of your choosing:
 <ul>
-    <li><code>main</code>: For nRF Connect SDK version v3.4.0 </li> 
+    <li><code>main</code>: For nRF Connect SDK version v3.4.1 </li> 
 </ul>
 
 The course supports the following hardware:
+ - [nRF54LC10 DK](https://www.nordicsemi.com/Products/Development-hardware/nRF54LC10-DK) - On nRF Connect SDK v3.4.1 and above
  - [nRF54LS05 DK](https://www.nordicsemi.com/Products/Development-hardware/nRF54LS05-DK) - On nRF Connect SDK v3.3.0 and above
  - [nRF54LM20 DK](https://www.nordicsemi.com/Products/Development-hardware/nRF54LM20-DK) - On nRF Connect SDK v3.1.1 and above
  - [nRF54L15 DK](https://www.nordicsemi.com/Products/Development-hardware/nRF54L15-DK) - On nRF Connect SDK v2.9.0 and above
